@@ -28,7 +28,7 @@ def login():
     if user is not None and user.validate_auth(form):
         r.success = True
         r.message = '登录成功'
-        r.next = url_for('timeline_view', user_id=user.id)
+        r.next = url_for('api_timeline.timeline_view', user_id=user.id)
         session.permanent = True
         session['username'] = username
     else:
