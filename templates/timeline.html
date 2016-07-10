@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}个人主页{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/buttons.css">
+    <script src="/static/weibo.js"></script>
+    <script>
+    var bindActions = function () {
+        $('#id-btn-sub').on('click', function () {
+            tweet();
+        })
+    };
+
+    var __main = function () {
+        bindActions();
+    };
+
+    $(document).ready(function () {
+        __main();
+    });
+    </script>
+{% endblock %}
+{% block content2 %}
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="说点什么~~" id="id-input-content">
+        <span class="input-group-btn">
+            <button class="btn btn-info" id="id-btn-sub">发布</button>
+        </span>
+    </div>
+    <hr>
+    <div id="id-div-insert">
+    </div>
+
+
+{% endblock %}

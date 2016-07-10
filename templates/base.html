@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>{% block head %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <script src='/static/jquery.min.js'></script>
+    <script src="/static/bootstrap.min.js"></script>
+    <title>{% block title %}base{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+<div class="row">
+    <div class="col-md-12">
+        <div class="page-header" style="background: #0099FF;border-style: solid;border-color: transparent;">
+            <h1 style="text-align: center;color: #ffffff; position: relative; top: 5px;" >清真微博</h1>
+        </div>
+    </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+      {% block content1 %}{% endblock %}</div>
+  <div class="col-md-4">
+      {% block content2 %}{% endblock %}</div>
+  <div class="col-md-4">
+      {% block content3 %}{% endblock %}</div>
+</div>
+</body>
+</html>
