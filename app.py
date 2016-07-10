@@ -10,7 +10,8 @@ from flask import Blueprint
 from models import User
 from models import ResponseData
 from models import Tweet
-from time_filter import formatted_time
+# from time_filter import formatted_time
+from api.login import api_login
 
 
 app = Flask(__name__)
@@ -36,31 +37,31 @@ def index():
 def login_view():
     return render_template('login.html')
 
-# app.register_blueprint(api)
+app.register_blueprint(api_login)
 # 处理登录请求  POST
-@app.route('/login', methods=['POST'])
-def login():
-    # u = User(request.form)
-    form = request.get_json()
-    username = form.get('username', '')
-    user = User.query.filter_by(username=username).first()
-    # r = {
-    #     'success': False,
-    #     'message': '登录失败',
-    #     'next': '',
-    # }
-    r = ResponseData()
-    if user is not None and user.validate_auth(form):
-        r.success = True
-        r.message = '登录成功'
-        r.next = url_for('timeline_view', user_id=user.id)
-        session.permanent = True
-        session['username'] = username
-    else:
-        r.message = '登录失败'
-    r = r.jsonstr()
-    # print("r is ,", r)
-    return jsonify(r)
+# @app.route('/login', methods=['POST'])
+# def login():
+#     # u = User(request.form)
+#     form = request.get_json()
+#     username = form.get('username', '')
+#     user = User.query.filter_by(username=username).first()
+#     # r = {
+#     #     'success': False,
+#     #     'message': '登录失败',
+#     #     'next': '',
+#     # }
+#     r = ResponseData()
+#     if user is not None and user.validate_auth(form):
+#         r.success = True
+#         r.message = '登录成功'
+#         r.next = url_for('timeline_view', user_id=user.id)
+#         session.permanent = True
+#         session['username'] = username
+#     else:
+#         r.message = '登录失败'
+#     r = r.jsonstr()
+#     # print("r is ,", r)
+#     return jsonify(r)
 
 
 # 处理注册的请求  POST

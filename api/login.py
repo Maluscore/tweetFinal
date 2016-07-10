@@ -10,10 +10,10 @@ from models import ResponseData
 _author = 'peng'
 
 
-api = Blueprint('api', __name__, url_prefix='/api')
+api_login = Blueprint('api_login', __name__)
 
 
-@api.route('/login', methods=['POST'])
+@api_login.route('/login', methods=['POST'])
 def login():
     # u = User(request.form)
     form = request.get_json()
@@ -36,5 +36,3 @@ def login():
     r = r.jsonstr()
     # print("r is ,", r)
     return jsonify(r)
-
-
