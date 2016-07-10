@@ -7,10 +7,13 @@ from functools import wraps
 
 # 通过 session 来获取当前登录的用户
 def current_user():
-    # print('session, debug', session.permanent)
-    username = session.get('username', '')
-    u = User.query.filter_by(username=username).first()
-    return u
+    try:
+        # print('session, debug', session.permanent)
+        username = session.get('username', '')
+        u = User.query.filter_by(username=username).first()
+        return u
+    except KeyError:
+        return None
 
 
 # 判断登录权限
