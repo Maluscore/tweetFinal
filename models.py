@@ -44,10 +44,12 @@ class User(db.Model, ReprMixin):
         self.created_time = int(time.time())
 
     def json(self):
-        self.id  # 加上这个就可以了
-        _dict = self.__dict__.deepcopy()
+        # 加上这个就可以了
+        self.id
+        _dict = self.__dict__.copy()
         d = {k: v for k, v in _dict.items() if k not in self.blacklist()}
         # d['topics'] = [t.json() for t in self.topics]
+        print('debug d, ', d)
         return d
 
     def blacklist(self):
@@ -55,15 +57,10 @@ class User(db.Model, ReprMixin):
             'password',
             'created_time',
             'id',
+            '_sa_instance_state',
         ]
         return b
 
-    def format_json(self):
-        d = self.json()
-        blacklist = self.blacklist()
-        for i in blacklist:
-            del d[i]
-        return d
 
     def validate_auth(self, form):
         username = form.get('username', '')
@@ -118,22 +115,15 @@ class Tweet(db.Model, ReprMixin):
 
     def json(self):
         self.id  # 加上这个就可以了
-        _dict = self.__dict__.deepcopy()
+        _dict = self.__dict__.copy()
         d = {k: v for k, v in _dict.items() if k not in self.blacklist()}
         return d
 
     def blacklist(self):
         b = [
-
+            '_sa_instance_state',
         ]
         return b
-
-    def format_json(self):
-        d = self.json()
-        blacklist = self.blacklist()
-        for i in blacklist:
-            del d[i]
-        return d
 
     def save(self):
         db.session.add(self)
@@ -155,7 +145,8 @@ class ResponseData(object):
         self.message = ''
 
     def jsonstr(self):
-        return self.__dict__
+        r = self.__dict__
+        return r
 
 
 def backup_db():
