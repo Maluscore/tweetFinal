@@ -24,7 +24,7 @@ def register():
     if status:
         u.save()
         r.success = True
-        r.next = url_for('timeline.timeline_view', user_id=u.id)
+        r.next = url_for('api_timeline.timeline_view', user_id=u.id)
         # 下面这句可以在关闭浏览器后保持用户登录
         session.permanent = True
         session['username'] = u.username

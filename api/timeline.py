@@ -3,6 +3,7 @@ from flask import Blueprint
 from api.user_limit import requires_login
 
 from models import User
+
 api_timeline = Blueprint('api_timeline', __name__)
 
 
