@@ -1,6 +1,8 @@
 from flask import Flask
 from flask import redirect
 from flask import url_for
+
+from time_filter import formatted_time
 from api.login import api_login
 from api.login_view import api_login_view
 from api.register import api_register
@@ -10,6 +12,7 @@ from api.tweet_add import api_tweet_add
 app = Flask(__name__)
 app.secret_key = 'random string'
 
+app.jinja_env.filters['formatted_time'] = formatted_time
 
 # 通过 session 来获取当前登录的用户
 # def current_user():

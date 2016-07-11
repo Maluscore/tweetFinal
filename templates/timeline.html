@@ -49,8 +49,34 @@
     </div>
     <hr>
     <div id="id-div-insert">
-
+        {% for t in tweets %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <p class="panel-title">{{user.username}}
+                        <a href=""><i class="icon-remove pull-right" title="删除"></i></a>
+                        <br>{{t.created_time | formatted_time}}
+                    </p>
+                </div>
+                <div class="panel-body">
+                    {{t.content}}
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <a class="btn" href="#">
+                                <i class=" icon-share-alt"></i>转发</a>
+                        </td>
+                        <td>
+                            <a class="btn" href="#">
+                                <i class="icon-comment"></i>评论</a>
+                        </td>
+                        <td>
+                            <a class="btn" href="#">
+                                <i class="icon-thumbs-up"></i>赞</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
     </div>
-
-
 {% endblock %}

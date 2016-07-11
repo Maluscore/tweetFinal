@@ -11,4 +11,6 @@ api_timeline = Blueprint('api_timeline', __name__)
 @requires_login
 def timeline_view(user_id):
     user = User.query.filter_by(id=user_id).first()
-    return render_template('timeline.html', user=user)
+    tweets = user.tweets
+    tweets.sort(key=lambda t: t.created_time, reverse=True)
+    return render_template('timeline.html', user=user, tweets=tweets)
