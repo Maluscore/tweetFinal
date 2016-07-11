@@ -20,9 +20,12 @@ def tweet_add():
     if content is not None:
         tweet.save()
         r.message = '发表成功'
-        r.content = content
         r.success = True
+        r = r.jsonstr()
+        r = r.update(u.format_json())
+        r = r.updat(tweet.format_json())
     else:
         r.message = '请输入有效内容'
-    r = r.jsonstr()
+        r = r.jsonstr()
+    print(r)
     return jsonify(r)
