@@ -44,13 +44,13 @@ var tweet = function () {
             log(r.message);
             var addContent = (`<div class="panel panel-default">
                                   <div class="panel-heading">
-                                    <p class="panel-title">user
+                                    <p class="panel-title">${r.username}
                                     <a href=""><i class="icon-remove pull-right" title="删除"></i></a>
-                                     <br>time
+                                     <br>${r.created_time}
                                     </p>
                                   </div>
                                   <div class="panel-body">
-                                    Panel content
+                                    ${r.content}
                                   </div>
                                   <table class="table">
                                   <tr>
