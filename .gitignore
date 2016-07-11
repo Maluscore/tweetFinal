@@ -50,5 +50,6 @@ Temporary Items
 __pycache__/*
 .idea/
 tweetFinal
-api/__pycache__/*
-__pycache__/
+api/__pycache__
+__pycache__
+db.sqlite

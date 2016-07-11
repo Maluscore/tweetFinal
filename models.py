@@ -6,7 +6,6 @@ from flask_sqlalchemy import SQLAlchemy
 import time
 import shutil
 
-
 # 数据库的路径
 db_path = './db.sqlite'
 # 获取 app 的实例
@@ -34,6 +33,7 @@ class User(db.Model, ReprMixin):
     password = db.Column(db.String())
     created_time = db.Column(db.Integer, default=0)
     tweets = db.relationship('Tweet', backref='user')
+
     # 这是引用别的表的数据的属性，表明了它关联的东西
     # tweets = db.relationship('Tweet', backref='user')
 
@@ -52,10 +52,18 @@ class User(db.Model, ReprMixin):
 
     def blacklist(self):
         b = [
-            '_sa_instance_state',
             'password',
+            'created_time',
+            'id',
         ]
         return b
+
+    def format_json(self):
+        d = self.json()
+        blacklist = self.blacklist()
+        for i in blacklist:
+            del d[i]
+        return d
 
     def validate_auth(self, form):
         username = form.get('username', '')
@@ -107,6 +115,25 @@ class Tweet(db.Model, ReprMixin):
     def __init__(self, form):
         self.content = form.get('content', '')
         self.created_time = int(time.time())
+
+    def json(self):
+        self.id  # 加上这个就可以了
+        _dict = self.__dict__.deepcopy()
+        d = {k: v for k, v in _dict.items() if k not in self.blacklist()}
+        return d
+
+    def blacklist(self):
+        b = [
+
+        ]
+        return b
+
+    def format_json(self):
+        d = self.json()
+        blacklist = self.blacklist()
+        for i in blacklist:
+            del d[i]
+        return d
 
     def save(self):
         db.session.add(self)

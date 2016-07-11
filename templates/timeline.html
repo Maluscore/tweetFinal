@@ -20,15 +20,36 @@
     });
     </script>
 {% endblock %}
+
+{% block username %}
+    {{user.username}}
+{% endblock %}
+
+{% block content1 %}
+    <div style="text-align: center">
+        <ul class="list-group">
+            <li class="list-group-item">
+            <span class="badge">14</span>
+                关注人数
+            </li>
+            <li class="list-group-item">
+            <span class="badge">11</span>
+                粉丝人数
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
 {% block content2 %}
     <div class="input-group">
         <input type="text" class="form-control" placeholder="说点什么~~" id="id-input-content">
         <span class="input-group-btn">
-            <button class="btn btn-info" id="id-btn-sub">发布</button>
+            <button class="btn" id="id-btn-sub" style="background: #EEEEEE;">发布</button>
         </span>
     </div>
     <hr>
     <div id="id-div-insert">
+
     </div>
 
 

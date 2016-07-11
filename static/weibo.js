@@ -42,7 +42,34 @@ var tweet = function () {
         log('r, ', r);
         if (r.success){
             log(r.message);
-            var addContent = '<p class="bg-info">' + r.content +'</P>';
+            var addContent = (`<div class="panel panel-default">
+                                  <div class="panel-heading">
+                                    <p class="panel-title">user
+                                    <a href=""><i class="icon-remove pull-right" title="删除"></i></a>
+                                     <br>time
+                                    </p>
+                                  </div>
+                                  <div class="panel-body">
+                                    Panel content
+                                  </div>
+                                  <table class="table">
+                                  <tr>
+                                  <td>
+                                  <a class="btn" href="#">
+                                  <i class=" icon-share-alt"></i>转发</a>
+</td>
+                                  <td>
+                                  <a class="btn" href="#">
+                                  <i class="icon-comment"></i>评论</a>
+</td>
+                                  <td>
+                                  <a class="btn" href="#">
+                                  <i class="icon-thumbs-up"></i>赞</a>
+</td>
+                                  </tr>
+</table>
+                                </div>`);
+
             var insertPlace = $('#id-div-insert');
             insertPlace.prepend(addContent);
         }else {
