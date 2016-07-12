@@ -45,7 +45,7 @@ var tweet = function () {
             var addContent = (`<div class="panel panel-default">
                                   <div class="panel-heading">
                                     <p class="panel-title">${r.username}
-                                    <a href=""><i class="icon-remove pull-right" title="删除"></i></a>
+                                    <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
                                      <br>${r.created_time}
                                     </p>
                                   </div>
@@ -55,15 +55,15 @@ var tweet = function () {
                                   <table class="table">
                                   <tr>
                                   <td>
-                                  <a class="btn" href="#">
+                                  <a class="btn">
                                   <i class=" icon-share-alt"></i>转发</a>
 </td>
                                   <td>
-                                  <a class="btn" href="#">
+                                  <a class="btn">
                                   <i class="icon-comment"></i>评论</a>
 </td>
                                   <td>
-                                  <a class="btn" href="#">
+                                  <a class="btn">
                                   <i class="icon-thumbs-up"></i>赞</a>
 </td>
                                   </tr>

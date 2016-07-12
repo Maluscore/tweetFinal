@@ -11,6 +11,7 @@ def current_user():
         # print('session, debug', session.permanent)
         username = session.get('username', '')
         u = User.query.filter_by(username=username).first()
+        print('debug u,', u)
         return u
     except KeyError:
         return None

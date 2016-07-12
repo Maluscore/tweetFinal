@@ -29,7 +29,7 @@ def login():
         r.success = True
         r.message = '登录成功'
         r.next = url_for('api_timeline.timeline_view', user_id=user.id)
-        session.permanent = True
+        session.permanent = False
         session['username'] = username
     else:
         r.message = '登录失败'
