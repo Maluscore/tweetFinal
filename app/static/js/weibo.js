@@ -1,6 +1,4 @@
-/**
- * Created by gua on 7/6/16 1:48:01
- */
+
 
 // log
 var log = function () {
@@ -19,6 +17,7 @@ var formFromKeys = function(keys, prefix) {
             // alert('字段不能为空');
             break;
         }
+        $('#' + tagid).val('');
         form[key] = value;
     }
     return form;
@@ -36,7 +35,7 @@ var tweetForm = function () {
     return form;
 };
 
-var tweet = function () {
+var tweet_add = function () {
     var form = tweetForm();
     var success = function (r) {
         log('r, ', r);
@@ -79,7 +78,7 @@ var tweet = function () {
     var error = function (err) {
         log('reg, ', err);
     };
-    weibo.tweet(form, success, error);
+    weibo.tweet_add(form, success, error);
 };
 
 weibo.post = function(url, form, success, error) {
@@ -111,7 +110,7 @@ weibo.login = function(form, success, error) {
     this.post(url, form, success, error);
 };
 
-weibo.tweet = function (form, success, error) {
+weibo.tweet_add = function (form, success, error) {
     var url = '/api/tweet/add';
     this.post(url, form, success, error);
 };
