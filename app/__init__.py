@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-
+from .time_filter import formatted_time
 # 暴露 db 是因为 models 要使用它
 # 但是这时候还没有 app 所以要在 app 初始化之后再初始化这个 db
 db = SQLAlchemy()
@@ -11,10 +11,11 @@ db = SQLAlchemy()
 # 由外部启动函数来调用
 #
 def init_app():
-    db_path = 'db1.sqlite'
+    db_path = 'db.sqlite'
 
     # 初始化并配置 flask
     app = Flask(__name__)
+    app.jinja_env.filters['formatted_time'] = formatted_time
     # 这一行 加了就没 warning
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
     # 设置你的加密 key
@@ -26,5 +27,13 @@ def init_app():
 
     # 必须在函数中 import 蓝图
     # 否则循环引用(因为蓝图中 import 了 model, model 引用了这个文件里面目的 db)
+    from .auth import blue as auth
+    from .controllers import main as controllers
+    from .api import main as api
+
+    # 注册蓝图
+    app.register_blueprint(auth)
+    app.register_blueprint(controllers)
+    app.register_blueprint(api, url_prefix='/api')
 
     return app

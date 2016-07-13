@@ -17,6 +17,10 @@ class User(db.Model, ReprMixin):
     # 这是引用别的表的数据的属性，表明了它关联的东西
     # tweets = db.relationship('Tweet', backref='user')
 
+    @staticmethod
+    def user_by_name(username):
+        return User.query.filter_by(username=username).first()
+
     def __init__(self, form):
         super(User, self).__init__()
         self.username = form.get('username', '')
@@ -60,11 +64,12 @@ class User(db.Model, ReprMixin):
         db.session.delete(self)
         db.session.commit()
 
-    # 验证注册用户的合法性的
-    def valid(self):
-        valid_username = User.query.filter_by(username=self.username).first() is None
-        valid_username_len = len(self.username) >= 3
-        valid_password_len = len(self.password) >= 3
+    # 验证注册用户的合法性
+    def register_validate(self):
+        min_len = 3
+        valid_username = User.query.filter_by(username=self.username).first() == None
+        valid_username_len = len(self.username) >= min_len
+        valid_password_len = len(self.password) >= min_len
         msgs = []
         if not valid_username:
             message = '用户名已经存在'

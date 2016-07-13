@@ -2,6 +2,7 @@ from ..models import User
 from ..models import Tweet
 from . import main
 from . import current_user
+from ..time_filter import formatted_time
 
 from flask import request
 from flask import jsonify
@@ -25,6 +26,8 @@ def tweet_add():
         r['success'] = True
         # 下面不能用等号去接，不然就是空
         r['data'] = tweet.json()
+        r['data']['username'] = u.username
+        r['data']['created_time'] = formatted_time(tweet.created_time)
     else:
         r['message'] = '请输入有效内容'
     print(r)

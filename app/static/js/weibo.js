@@ -44,13 +44,13 @@ var tweet = function () {
             log(r.message);
             var addContent = (`<div class="panel panel-default">
                                   <div class="panel-heading">
-                                    <p class="panel-title">${r.username}
+                                    <p class="panel-title">${r.data.username}
                                     <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
-                                     <br>${r.created_time}
+                                     <br>${r.data.created_time}
                                     </p>
                                   </div>
                                   <div class="panel-body">
-                                    ${r.content}
+                                    ${r.data.content}
                                   </div>
                                   <table class="table">
                                   <tr>
@@ -112,6 +112,6 @@ weibo.login = function(form, success, error) {
 };
 
 weibo.tweet = function (form, success, error) {
-    var url = '/post/tweet/add';
+    var url = '/api/tweet/add';
     this.post(url, form, success, error);
 };

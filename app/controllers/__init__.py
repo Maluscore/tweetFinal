@@ -16,13 +16,9 @@ def current_user():
     return u
 
 
-@main.route('/timeline')
-def timeline_view():
-    u = current_user()
-    return render_template('timeline.html', user=u)
-
-
-@main.route('/timeline/<username>')
-def user_timeline_view(username):
-    u = User.query.filter_by(username=username).first_or_404()
-    return render_template('timeline.html', user=u)
+@main.route('/timeline/<user_id>')
+def timeline_view(user_id):
+    u = User.query.filter_by(id=user_id).first_or_404()
+    tweets = u.tweets
+    tweets.sort(key=lambda t: t.created_time, reverse=True)
+    return render_template('timeline.html', user=u, tweets=tweets)

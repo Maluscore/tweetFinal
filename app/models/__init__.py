@@ -7,6 +7,5 @@ class ReprMixin(object):
         return u'<{}: {}>'.format(class_name, self.id)
 
 
-# 在 ReprMixin 后导入所有 model 类
 from .User import User
 from .Tweet import Tweet
