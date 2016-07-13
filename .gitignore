@@ -53,3 +53,6 @@ tweetFinal
 api/__pycache__
 __pycache__
 db.sqlite
+cc.py
+*.pyc
+app.py
