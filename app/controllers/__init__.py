@@ -22,3 +22,8 @@ def timeline_view(user_id):
     tweets = [t for t in u.tweets if t.deleted == 0]
     tweets.sort(key=lambda t: t.created_time, reverse=True)
     return render_template('timeline.html', user=u, tweets=tweets)
+
+@main.route('/user/all')
+def user_all():
+    users = User.query.all()
+    return render_template('user_all.html', user_all = users)

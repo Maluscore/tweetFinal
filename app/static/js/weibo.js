@@ -41,7 +41,7 @@ var tweet_add = function () {
         log('r, ', r);
         if (r.success){
             log(r.message);
-            var addContent = (`<div class="panel panel-default" id='id-tweet-' + ${r.data.id}>
+            var addContent = (`<div class="panel panel-default" data-id="${r.data.id}">
                                   <div class="panel-heading">
                                     <p class="panel-title">${r.data.username}
                                     <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>

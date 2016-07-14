@@ -10,7 +10,7 @@
         $('#id-btn-sub').on('click', function () {
             tweet_add();
         });
-        $('.icon-remove').on('click', function () {
+        $('#id-div-insert').on('click', '.icon-remove', function () {
             var $self = $(this);
             tweet_delete($self);
         })
