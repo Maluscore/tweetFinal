@@ -12,9 +12,7 @@
         });
         $('.icon-remove').on('click', function () {
             var $self = $(this);
-            var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
-            log('tweetID, ', tweetID);
-            tweet_delete(tweetID);
+            tweet_delete($self);
         })
     };
 

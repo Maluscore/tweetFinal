@@ -19,6 +19,6 @@ def current_user():
 @main.route('/timeline/<user_id>')
 def timeline_view(user_id):
     u = User.query.filter_by(id=user_id).first_or_404()
-    tweets = u.tweets
+    tweets = [t for t in u.tweets if t.deleted == 0]
     tweets.sort(key=lambda t: t.created_time, reverse=True)
     return render_template('timeline.html', user=u, tweets=tweets)

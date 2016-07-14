@@ -1,24 +1,23 @@
 /**
  * Created by PGH on 2016/7/13.
  */
-// var tweet_selected = function () {
-//     var $self = $(this);
-//     var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
-//     log('tweetID, ', tweetID);
-//     var form = {};
-//     form['id'] = tweetID;
-//     return form;
-// };
-
-var tweet_delete = function (tweetID) {
+var tweet_selected = function ($self) {
+    var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
+    log('tweetID, ', tweetID);
     var form = {};
     form['id'] = tweetID;
+    return form;
+};
+
+var tweet_delete = function ($self) {
+    var form = tweet_selected($self);
+    log('form, ', form);
     var success = function (r) {
         log('r, ', r);
         if (r.success) {
             log(r.message);
-            var tweetForm = $(this).parentsUntil('#id-div-insert').last();
-            tweetForm.empty();
+            var tweetForm = $self.parentsUntil('#id-div-insert').last();
+            tweetForm.remove();
         } else {
             alert('删除失败！')
         }
