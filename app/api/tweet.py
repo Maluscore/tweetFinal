@@ -32,3 +32,18 @@ def tweet_add():
         r['message'] = '请输入有效内容'
     print(r)
     return jsonify(r)
+
+
+@main.route('/tweet/delete', methods=['POST'])
+def tweet_delete():
+    form = request.get_json()
+    # print('debug form, ', form)
+    t = Tweet.query.filter_by(id=form['id']).first()
+    r = dict(
+        success=True,
+        message='删除成功！'
+    )
+    print('debug t,', t.deleted)
+    t.deleted = 1
+    t.save()
+    return jsonify(r)

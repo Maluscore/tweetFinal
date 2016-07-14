@@ -1,34 +1,24 @@
 /**
  * Created by PGH on 2016/7/13.
  */
-var tweetAct = function (icon, tweetID) {
-    if (icon = 'icon-remove')
-    {
-        tweet_delete(tweetID);
-    }
-    else if (icon = 'icon-share-alt')
-    {
-        tweet_share(tweetID);
-    }
-    else if (icon = 'icon-comment')
-    {
-        tweet_comment(tweetID);
-    }
-    else if (icon = 'icon-thumbs-up')
-    {
-        tweet_thumbs_up(tweetID);
-    }
-};
+// var tweet_selected = function () {
+//     var $self = $(this);
+//     var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
+//     log('tweetID, ', tweetID);
+//     var form = {};
+//     form['id'] = tweetID;
+//     return form;
+// };
 
 var tweet_delete = function (tweetID) {
-    var form = {
-        id: "tweetID"
-    };
+    var form = {};
+    form['id'] = tweetID;
     var success = function (r) {
         log('r, ', r);
         if (r.success) {
             log(r.message);
-            $('#id-tweet-' + r.data.id).empty();
+            var tweetForm = $(this).parentsUntil('#id-div-insert').last();
+            tweetForm.empty();
         } else {
             alert('删除失败！')
         }

@@ -4,17 +4,17 @@
     {{ super() }}
     <link rel="stylesheet" href="/static/css/buttons.css">
     <script src="/static/js/weibo.js"></script>
+    <script src="/static/js/weiboAct.js"></script>
     <script>
     var bindActions = function () {
         $('#id-btn-sub').on('click', function () {
             tweet_add();
         });
-        $('.panel').on('click', function () {
+        $('.icon-remove').on('click', function () {
             var $self = $(this);
-            var tweetID = $self.parent('.panel panel-default').attr('id');
-            var icon = $self.attr('class');
-            tweetAct(icon, tweetID);
-
+            var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
+            log('tweetID, ', tweetID);
+            tweet_delete(tweetID);
         })
     };
 
@@ -57,7 +57,7 @@
     <hr>
     <div id="id-div-insert">
         {% for t in tweets %}
-            <div class="panel panel-default" id="id-tweet-{{t.id}}">
+            <div class="panel panel-default" data-id={{t.id}}>
                 <div class="panel-heading">
                     <p class="panel-title">{{user.username}}
                         <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
