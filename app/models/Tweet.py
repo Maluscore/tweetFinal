@@ -10,12 +10,14 @@ class Tweet(db.Model, ReprMixin):
     content = db.Column(db.String())
     created_time = db.Column(db.Integer, default=0)
     com_count = db.Column(db.Integer, default=0)
+    deleted = db.Column(db.Integer, default=0)
     # 这是一个外键
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     def __init__(self, form):
         self.content = form.get('content', '')
         self.created_time = int(time.time())
+        self.deleted = 0
 
     def json(self):
         self.id  # 加上这个就可以了

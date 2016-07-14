@@ -12,6 +12,7 @@ class User(db.Model, ReprMixin):
     username = db.Column(db.String())
     password = db.Column(db.String())
     created_time = db.Column(db.Integer, default=0)
+    deleted = db.Column(db.Integer, default=0)
     tweets = db.relationship('Tweet', backref='user')
 
     # 这是引用别的表的数据的属性，表明了它关联的东西
@@ -26,6 +27,7 @@ class User(db.Model, ReprMixin):
         self.username = form.get('username', '')
         self.password = form.get('password', '')
         self.created_time = int(time.time())
+        self.deleted = 0
 
     def json(self):
         # 加上这个就可以了

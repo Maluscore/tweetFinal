@@ -41,7 +41,7 @@ var tweet_add = function () {
         log('r, ', r);
         if (r.success){
             log(r.message);
-            var addContent = (`<div class="panel panel-default">
+            var addContent = (`<div class="panel panel-default" id='id-tweet-' + ${r.data.id}>
                                   <div class="panel-heading">
                                     <p class="panel-title">${r.data.username}
                                     <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
@@ -72,7 +72,7 @@ var tweet_add = function () {
             var insertPlace = $('#id-div-insert');
             insertPlace.prepend(addContent);
         }else {
-            alert('发布失败');  
+            alert('发布失败');
         }
     };
     var error = function (err) {
