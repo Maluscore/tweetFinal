@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}个人主页{% endblock %}
+{% block head %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/buttons.css">
+    <script src="/static/js/weibo.js"></script>
+    <script src="/static/js/weiboAct.js"></script>
+    <script>
+    var bindActions = function () {
+        if ({{current_user.id}} == {{user.id}})
+        {
+            $('#id-div-insert').on('click', '.icon-remove', function () {
+            var $self = $(this);
+            tweet_delete($self);
+            });
+        }
+
+    };
+
+    var __main = function () {
+        bindActions();
+    };
+
+    $(document).ready(function () {
+        __main();
+    });
+    </script>
+{% endblock %}
+
+{% block username %}
+    {{user.username}}
+{% endblock %}
+
+{% block timeline %}
+<a href="/timeline/{{current_user.id}}">
+{% endblock %}
+
+{% block content1 %}
+    <div style="text-align: center">
+        <ul class="list-group">
+            <li class="list-group-item">
+            <span class="badge">14</span>
+                关注人数
+            </li>
+            <li class="list-group-item">
+            <span class="badge">11</span>
+                粉丝人数
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content2 %}
+<div class="page-header">
+    <h1>TA的微博</h1>
+</div>
+    <hr>
+    <div id="id-div-insert">
+        {% for t in tweets %}
+            <div class="panel panel-default" data-id={{t.id}}>
+                <div class="panel-heading">
+                    <p class="panel-title">{{user.username}}
+                        <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
+                        <br>{{t.created_time | formatted_time}}
+                    </p>
+                </div>
+                <div class="panel-body">
+                    {{t.content}}
+                </div>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <a class="btn">
+                                <i class=" icon-share-alt"></i>转发</a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                <i class="icon-comment"></i>评论</a>
+                        </td>
+                        <td>
+                            <a class="btn">
+                                <i class="icon-thumbs-up"></i>赞</a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

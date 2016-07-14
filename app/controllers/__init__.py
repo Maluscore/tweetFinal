@@ -26,4 +26,21 @@ def timeline_view(user_id):
 @main.route('/user/all')
 def user_all():
     users = User.query.all()
-    return render_template('user_all.html', user_all = users)
+    user = current_user()
+    d = dict(
+        user_all=users,
+        current_user=user,
+    )
+    return render_template('user_all.html', **d)
+
+@main.route('/user/<user_id>')
+def user_view(user_id):
+    u = User.query.filter_by(id=user_id).first()
+    user = current_user()
+    tweets = [t for t in u.tweets if t.deleted == 0]
+    d = dict(
+        user=u,
+        tweets=tweets,
+        current_user=user,
+    )
+    return render_template('user.html', **d)
