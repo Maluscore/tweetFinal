@@ -20,9 +20,17 @@ def current_user():
 @main.route('/timeline/<user_id>')
 def timeline_view(user_id):
     u = User.query.filter_by(id=user_id).first_or_404()
+    follow_count = Follow.follow_count(u.id)
+    fans = Follow.fans(u.id)
     tweets = [t for t in u.tweets if t.deleted == 0]
     tweets.sort(key=lambda t: t.created_time, reverse=True)
-    return render_template('timeline.html', user=u, tweets=tweets)
+    d = dict(
+        user=u,
+        tweets=tweets,
+        follows_count=len(follow_count),
+        fans_count=len(fans),
+    )
+    return render_template('timeline.html', **d)
 
 
 @main.route('/user/all')
@@ -40,11 +48,20 @@ def user_all():
 def user_view(user_id):
     u = User.query.filter_by(id=user_id).first()
     user = current_user()
+    if u.id in Follow.follow_count(user.id):
+        status = '取消关注'
+    else:
+        status = '关注'
+    follow_count = Follow.follow_count(u.id)
+    fans = Follow.fans(u.id)
     tweets = [t for t in u.tweets if t.deleted == 0]
     d = dict(
         user=u,
         tweets=tweets,
         current_user=user,
+        status=status,
+        follows_count=len(follow_count),
+        fans_count=len(fans),
     )
     return render_template('user.html', **d)
 
@@ -54,10 +71,9 @@ def user_view(user_id):
 def follow_view(user_id):
     user_now = current_user()
     user = User.query.filter_by(id=user_id).first()
-    all_follows = Follow.query.filter_by(user_id=user_id).all()
-    follow_users_id = [x.followed_id for x in all_follows]
+    follow_id = Follow.follow_count(user_id)
     follow_users = []
-    for i in follow_users_id:
+    for i in follow_id:
         follow_users.append(User.query.filter_by(id=i).first())
     follow_users.sort(key=lambda t: t.created_time, reverse=True)
     d = dict(
@@ -73,12 +89,11 @@ def follow_view(user_id):
 def fan_view(user_id):
     user_now = current_user()
     user = User.query.filter_by(id=user_id).first()
-    all_fans = Follow.query.filter_by(followed_id=user_id).all()
-    fan_users = [x.follows for x in all_fans]
-    fan_users.sort(key=lambda t: t.created_time, reverse=True)
+    all_fans = Follow.fans(user_id)
+    all_fans.sort(key=lambda t: t.created_time, reverse=True)
     d = dict(
         user_now=user_now,
-        fan_users=fan_users,
+        all_fans=all_fans,
         user=user,
     )
     return render_template('fan_users.html', **d)

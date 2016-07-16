@@ -7,14 +7,16 @@
     <script src="/static/js/weiboAct.js"></script>
     <script>
     var bindActions = function () {
-        if ({{current_user.id}} == {{user.id}})
-        {
-            $('#id-div-insert').on('click', '.icon-remove', function () {
-            var $self = $(this);
-            tweet_delete($self);
-            });
-        }
-
+        $('#id-div-insert').on('click', '.icon-remove', function () {
+            if ({{current_user.id}} == {{user.id}})
+            {
+                var $self = $(this);
+                tweet_delete($self);
+            }
+        });
+        $('a#status').on('click', function () {
+            user_act();
+        })
     };
 
     var __main = function () {
@@ -28,7 +30,7 @@
 {% endblock %}
 
 {% block username %}
-    {{user.username}}
+    {{user.username}}&nbsp <a class="btn btn-default" id="status">{{status}}</a>
 {% endblock %}
 
 {% block timeline %}
@@ -39,11 +41,11 @@
     <div style="text-align: center">
         <ul class="list-group">
             <li class="list-group-item">
-            <span class="badge">14</span>
+            <span class="badge">{{follows_count}}</span>
                 关注人数
             </li>
             <li class="list-group-item">
-            <span class="badge">11</span>
+            <span class="badge">{{fans_count}}</span>
                 粉丝人数
             </li>
         </ul>
