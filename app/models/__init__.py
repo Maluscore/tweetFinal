@@ -9,3 +9,4 @@ class ReprMixin(object):
 
 from .User import User
 from .Tweet import Tweet
+from .Follow import Follow

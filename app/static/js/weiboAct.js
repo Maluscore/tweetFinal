@@ -9,6 +9,7 @@ var tweet_selected = function ($self) {
     return form;
 };
 
+// 删除
 var tweet_delete = function ($self) {
     var form = tweet_selected($self);
     log('form, ', form);
@@ -28,6 +29,7 @@ var tweet_delete = function ($self) {
     weibo.tweet_delete(form, success, error);
 };
 
+// 转发
 var tweet_share = function (tweetID) {
     var form = {
         id: "tweetID"
@@ -47,6 +49,7 @@ var tweet_share = function (tweetID) {
     weibo.tweet_delete(form, success, error);
 };
 
+// 评论
 var tweet_comment = function (tweetID) {
     var form = {
         id: "tweetID"
@@ -66,6 +69,7 @@ var tweet_comment = function (tweetID) {
     weibo.tweet_delete(form, success, error);
 };
 
+// 点赞
 var tweet_thumbs_up = function (tweetID) {
     var form = {
         id: "tweetID"
