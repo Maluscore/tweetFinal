@@ -20,6 +20,7 @@ def follow_act():
         'success': True,
         'message': '关注成功！'
     }
+    print('debug, ', r['message'])
     return jsonify(r)
     # return redirect(url_for('timeline_view', username=u.username))
 
@@ -32,4 +33,10 @@ def unfollow_act():
     user_now = current_user()
     f = Follow().query.filter_by(user_id=user_now.id, followed_id=user_id).first()
     f.delete()
+    r = {
+        'success': True,
+        'message': '取消关注成功！'
+    }
+    print('debug, ', r['message'])
+    return jsonify(r)
     # return redirect(url_for('timeline_view', username=u.username))

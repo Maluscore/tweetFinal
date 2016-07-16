@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/static/css/buttons.css">
     <script src="/static/js/weibo.js"></script>
     <script src="/static/js/weiboAct.js"></script>
+    <script src="/static/js/userAct.js"></script>
     <script>
     var bindActions = function () {
         $('#id-div-insert').on('click', '.icon-remove', function () {
@@ -15,7 +16,8 @@
             }
         });
         $('a#status').on('click', function () {
-            user_act();
+            var user_id = {{user.id}};
+            user_act(user_id);
         })
     };
 

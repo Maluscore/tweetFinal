@@ -33,3 +33,4 @@ def login_required(f):
     return function
 
 from . import tweet
+from . import users

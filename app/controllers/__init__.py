@@ -48,10 +48,13 @@ def user_all():
 def user_view(user_id):
     u = User.query.filter_by(id=user_id).first()
     user = current_user()
-    if u.id in Follow.follow_count(user.id):
+    follow_list = Follow.follow_count(user.id)
+    if u.id in follow_list:
         status = '取消关注'
-    else:
+    elif u.id not in follow_list and u.id != user.id:
         status = '关注'
+    else:
+        status = ''
     follow_count = Follow.follow_count(u.id)
     fans = Follow.fans(u.id)
     tweets = [t for t in u.tweets if t.deleted == 0]

@@ -5,14 +5,10 @@ var log = function () {
 
 // user API
 var user = {
-  data:{}
+
 };
 
 user.ajax = function(url, method, form, success, error) {
-    if(method === 'post') {
-        var data = JSON.stringify(form);
-        request.data = data;
-    }
     var request = {
         url: url,
         type: method,
@@ -32,6 +28,7 @@ user.ajax = function(url, method, form, success, error) {
     };
     if(method === 'post') {
         var data = JSON.stringify(form);
+        log('data, ', data)
         request.data = data;
     }
     $.ajax(request);
@@ -39,11 +36,35 @@ user.ajax = function(url, method, form, success, error) {
 
 user.get = function(url, response) {
     var method = 'get';
-    var form = {}
+    var form = {};
     this.ajax(url, method, form, response, response);
 };
 
 user.post = function(url, form, success, error) {
     var method = 'post';
     this.ajax(url, method, form, success, error);
+};
+
+var user_act = function (user_id) {
+    var status = $('a#status').text();
+    if (status == '关注') {
+        var url = '/api/follow';
+        var success = function () {
+            log('status success, ');
+            $('a#status').text('取消关注');
+        };
+    }else {
+        url = '/api/unfollow';
+        var success = function () {
+            log('status error, ');
+            $('a#status').text('关注');
+        }
+    }
+    var form = {
+        id: user_id
+    };
+    var error = function (err) {
+        log('reg, ', err);
+    };
+    user.post(url, form, success, error)
 };
