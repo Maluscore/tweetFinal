@@ -40,25 +40,25 @@
 {% endblock %}
 
 {% block follow %}
-    <a href="/follow/list/{{user.id}}">
+    <a href="/follow/list/{{current_user.id}}">
 {% endblock %}
 
 {% block fans %}
-    <a href="/fan/list/{{user.id}}">
+    <a href="/fan/list/{{current_user.id}}">
 {% endblock %}
 
 {% block content1 %}
     <div style="text-align: center">
-        <ul class="list-group">
-            <li class="list-group-item">
+        <div class="list-group">
+            <a href="/follow/list/{{user.id}}" class="list-group-item">
             <span class="badge" id="id-badge-follows">{{follows_count}}</span>
                 关注人数
-            </li>
-            <li class="list-group-item">
+            </a>
+            <a href="/fan/list/{{user.id}}" class="list-group-item">
             <span class="badge" id="id-badge-fans">{{fans_count}}</span>
                 粉丝人数
-            </li>
-        </ul>
+            </a>
+        </div>
     </div>
 {% endblock %}
 

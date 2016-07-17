@@ -6,6 +6,14 @@
     {{user.username}}
 {% endblock %}
 
+{% block timeline %}
+    <a href="/timeline/{{current_user.id}}">
+{% endblock %}
+
+{% block fans %}
+    <a href="/fan/list/{{current_user.id}}">
+{% endblock %}
+
 
 {% block content1 %}
     <div style="text-align: center">
@@ -24,7 +32,7 @@
 
 {% block content2 %}
 <div class="page-header">
-    <h1>粉丝列表</h1>
+    <h1>关注列表</h1>
 </div>
 <ul class="list-group">
     {% for u in all_follows %}
