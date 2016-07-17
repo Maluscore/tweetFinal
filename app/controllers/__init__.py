@@ -37,9 +37,13 @@ def timeline_view(user_id):
 def user_all():
     users = User.query.all()
     user = current_user()
+    follow_count = Follow.follow_count(user.id)
+    fans = Follow.fans(user.id)
     d = dict(
         user_all=users,
         current_user=user,
+        follows_count=len(follow_count),
+        fans_count=len(fans),
     )
     return render_template('user_all.html', **d)
 

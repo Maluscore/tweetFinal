@@ -47,17 +47,25 @@ user.post = function(url, form, success, error) {
 
 var user_act = function (user_id) {
     var status = $('a#status').text();
+    var numberFollows = $('#id-badge-follows');
+    var numberFans = $('#id-badge-fans');
+    var count;
     if (status == '关注') {
         var url = '/api/follow';
         var success = function () {
             log('status success, ');
             $('a#status').text('取消关注');
+            count = +numberFans.text();
+            numberFans.text(count+1);
         };
-    }else {
+    }else if (status =='取消关注') 
+        {
         url = '/api/unfollow';
         var success = function () {
             log('status error, ');
             $('a#status').text('关注');
+            count = +numberFans.text();
+            numberFans.text(count-1);
         }
     }
     var form = {

@@ -32,7 +32,7 @@
 {% endblock %}
 
 {% block username %}
-    {{user.username}}&nbsp <a class="btn btn-default" id="status">{{status}}</a>
+    {{user.username}}{% if user.id != current_user.id %}&nbsp <a class="btn btn-default" id="status">{{status}}</a>{% endif %}
 {% endblock %}
 
 {% block timeline %}
@@ -43,11 +43,11 @@
     <div style="text-align: center">
         <ul class="list-group">
             <li class="list-group-item">
-            <span class="badge">{{follows_count}}</span>
+            <span class="badge" id="id-badge-follows">{{follows_count}}</span>
                 关注人数
             </li>
             <li class="list-group-item">
-            <span class="badge">{{fans_count}}</span>
+            <span class="badge" id="id-badge-fans">{{fans_count}}</span>
                 粉丝人数
             </li>
         </ul>
