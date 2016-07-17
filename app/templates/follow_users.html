@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}关注列表{% endblock %}
+
+
+{% block username %}
+    {{user.username}}
+{% endblock %}
+
+
+{% block content1 %}
+    <div style="text-align: center">
+        <ul class="list-group">
+            <li class="list-group-item">
+            <span class="badge" id="id-badge-follows">{{follows_count}}</span>
+                关注人数
+            </li>
+            <li class="list-group-item">
+            <span class="badge" id="id-badge-fans">{{fans_count}}</span>
+                粉丝人数
+            </li>
+        </ul>
+    </div>
+{% endblock %}
+
+{% block content2 %}
+<div class="page-header">
+    <h1>粉丝列表</h1>
+</div>
+<ul class="list-group">
+    {% for u in all_follows %}
+      <li class="list-group-item"><a href="/user/{{u.id}}">{{u.username}}</a> </li>
+    {% endfor %}
+</ul>
+{% endblock %}

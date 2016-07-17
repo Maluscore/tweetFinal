@@ -36,7 +36,15 @@
 {% endblock %}
 
 {% block timeline %}
-<a href="/timeline/{{current_user.id}}">
+    <a href="/timeline/{{current_user.id}}">
+{% endblock %}
+
+{% block follow %}
+    <a href="/follow/list/{{user.id}}">
+{% endblock %}
+
+{% block fans %}
+    <a href="/fan/list/{{user.id}}">
 {% endblock %}
 
 {% block content1 %}

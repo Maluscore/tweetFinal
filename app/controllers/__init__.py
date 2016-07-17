@@ -78,15 +78,19 @@ def user_view(user_id):
 def follow_view(user_id):
     user_now = current_user()
     user = User.query.filter_by(id=user_id).first()
+    follow_count = Follow.follow_count(user.id)
+    fans = Follow.fans(user.id)
     follow_id = Follow.follow_count(user_id)
     follow_users = []
     for i in follow_id:
         follow_users.append(User.query.filter_by(id=i).first())
     follow_users.sort(key=lambda t: t.created_time, reverse=True)
     d = dict(
-        user_now=user_now,
-        follow_users=follow_users,
-        user=user
+        current_user=user_now,
+        all_follows=follow_users,
+        user=user,
+        follows_count=len(follow_count),
+        fans_count=len(fans),
     )
     return render_template('follow_users.html', **d)
 
@@ -97,10 +101,13 @@ def fan_view(user_id):
     user_now = current_user()
     user = User.query.filter_by(id=user_id).first()
     all_fans = Follow.fans(user_id)
+    follow_count = Follow.follow_count(user_id)
     all_fans.sort(key=lambda t: t.created_time, reverse=True)
     d = dict(
-        user_now=user_now,
+        current_user=user_now,
         all_fans=all_fans,
         user=user,
+        follows_count=len(follow_count),
+        fans_count=len(all_fans),
     )
     return render_template('fan_users.html', **d)
