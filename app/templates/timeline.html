@@ -12,7 +12,10 @@
         });
         $('#id-div-insert').on('click', '.icon-remove', function () {
             var $self = $(this);
-            tweet_delete($self);
+            if ({{current_user.id}} == $self.attr('data-id'))
+            {
+                tweet_delete($self);
+            }
         })
     };
 
@@ -27,7 +30,7 @@
 {% endblock %}
 
 {% block username %}
-    {{user.username}}
+    {{current_user.username}}
 {% endblock %}
 
 {% block content1 %}
@@ -57,8 +60,8 @@
         {% for t in tweets %}
             <div class="panel panel-default" data-id={{t.id}}>
                 <div class="panel-heading">
-                    <p class="panel-title">{{user.username}}
-                        <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
+                    <p class="panel-title">{{t.sender_name}}
+                        <a class="btn pull-right"><i class="icon-remove" title="删除" data-id="{{t.user_id}}"></i></a>
                         <br>{{t.created_time | formatted_time}}
                     </p>
                 </div>

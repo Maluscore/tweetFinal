@@ -11,6 +11,7 @@ class Tweet(db.Model, ReprMixin):
     created_time = db.Column(db.Integer, default=0)
     com_count = db.Column(db.Integer, default=0)
     deleted = db.Column(db.Integer, default=0)
+    sender_name = db.Column(db.String())
     # 这是一个外键
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

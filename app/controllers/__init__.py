@@ -23,10 +23,19 @@ def timeline_view(user_id):
     follow_count = Follow.follow_count(u.id)
     fans = Follow.fans(u.id)
     tweets = [t for t in u.tweets if t.deleted == 0]
-    tweets.sort(key=lambda t: t.created_time, reverse=True)
+    # print('debug t,', tweets)
+    all_follows = []
+    for i in follow_count:
+        all_follows.append(User.query.filter_by(id=i).first())
+    all_follow_tweets = []
+    for i in all_follows:
+        all_follow_tweets += i.tweets
+    follow_tweets = [t for t in all_follow_tweets if t.deleted == 0]
+    show_tweets = tweets + follow_tweets
+    show_tweets.sort(key=lambda t: t.created_time, reverse=True)
     d = dict(
-        user=u,
-        tweets=tweets,
+        current_user=u,
+        tweets=show_tweets,
         follows_count=len(follow_count),
         fans_count=len(fans),
     )

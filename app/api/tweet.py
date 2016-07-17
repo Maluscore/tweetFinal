@@ -14,6 +14,7 @@ def tweet_add():
     tweet = Tweet(form)
     u = current_user()
     tweet.user_id = u.id
+    tweet.sender_name = u.username
     content = tweet.content
     # print('len, ', len(content)) 等于0
     # print('debug cc,', type(content)) 这里居然是字符串，看来ajax不会传null，空的直接当成空格了？
