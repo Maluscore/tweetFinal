@@ -5,6 +5,7 @@ from flask import render_template
 from flask import jsonify
 from flask import session
 from flask import Blueprint
+from functools import wraps
 
 from ..models import User
 
@@ -19,6 +20,19 @@ def current_user():
     username = session.get('username', '')
     u = User.query.filter_by(username=username).first()
     return u
+
+
+# 判断登录权限
+def requires_login(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        # f 是被装饰的函数
+        # 所以下面两行会先于被装饰的函数内容调用
+        print('debug, requires_login')
+        if current_user() is None:
+            return redirect(url_for('login_view'))
+        return f(*args, **kwargs)
+    return wrapped
 
 
 @blue.route('/')
@@ -81,3 +95,11 @@ def login():
         r['success'] = False
         r['message'] = '登录失败'
     return jsonify(r)
+
+
+# 处理注销请求 POST
+@blue.route('/logoff')
+@requires_login
+def logoff():
+    session.pop('username')
+    return redirect(url_for('.login_view'))

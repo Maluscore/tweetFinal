@@ -1,9 +1,12 @@
 from flask import render_template
 from flask import session
 from flask import Blueprint
+from flask import redirect
+from flask import url_for
 
 from ..models import User
 from ..models import Follow
+from functools import wraps
 
 
 main = Blueprint('controllers', __name__)
@@ -17,7 +20,21 @@ def current_user():
     return u
 
 
+# 判断登录权限
+def requires_login(f):
+    @wraps(f)
+    def wrapped(*args, **kwargs):
+        # f 是被装饰的函数
+        # 所以下面两行会先于被装饰的函数内容调用
+        print('debug, requires_login')
+        if current_user() is None:
+            return redirect(url_for('auth.login_view'))
+        return f(*args, **kwargs)
+    return wrapped
+
+
 @main.route('/timeline/<user_id>')
+@requires_login
 def timeline_view(user_id):
     u = User.query.filter_by(id=user_id).first_or_404()
     follow_count = Follow.follow_count(u.id)
@@ -43,6 +60,7 @@ def timeline_view(user_id):
 
 
 @main.route('/user/all')
+@requires_login
 def user_all():
     users = User.query.all()
     user = current_user()
@@ -58,6 +76,7 @@ def user_all():
 
 
 @main.route('/user/<user_id>')
+@requires_login
 def user_view(user_id):
     u = User.query.filter_by(id=user_id).first()
     user = current_user()
@@ -84,6 +103,7 @@ def user_view(user_id):
 
 # 显示 关注列表 的界面 GET
 @main.route('/follow/list/<user_id>')
+@requires_login
 def follow_view(user_id):
     user_now = current_user()
     user = User.query.filter_by(id=user_id).first()
@@ -106,6 +126,7 @@ def follow_view(user_id):
 
 # 显示 粉丝列表 的界面 GET
 @main.route('/fan/list/<user_id>')
+@requires_login
 def fan_view(user_id):
     user_now = current_user()
     user = User.query.filter_by(id=user_id).first()
