@@ -34,3 +34,4 @@ def login_required(f):
 
 from . import tweet
 from . import users
+from . import comment

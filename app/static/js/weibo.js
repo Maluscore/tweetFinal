@@ -44,29 +44,26 @@ var tweet_add = function () {
             var addContent = (`<div class="panel panel-default" data-id="${r.data.id}">
                                   <div class="panel-heading">
                                     <p class="panel-title">${r.data.username}
-                                    <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
-                                     <br>${r.data.created_time}
+                                    <a class="btn pull-right"><button class="icon-remove btn btn-default" title="删除"></button></a>
+                                    <br>${r.data.created_time}
                                     </p>
                                   </div>
                                   <div class="panel-body">
                                     ${r.data.content}
                                   </div>
-                                  <table class="table">
+                              <table class="table">
                                   <tr>
                                   <td>
-                                  <a class="btn">
-                                  <i class=" icon-share-alt"></i>转发</a>
-</td>
+                                      <a class="btn icon-share-alt">转发</a>
+                                  </td>
                                   <td>
-                                  <a class="btn">
-                                  <i class="icon-comment"></i>评论</a>
-</td>
+                                      <a class="btn icon-comment">评论</a>
+                                  </td>
                                   <td>
-                                  <a class="btn">
-                                  <i class="icon-thumbs-up"></i>赞</a>
-</td>
+                                      <a class="btn icon-thumbs-up">赞</a>
+                                  </td>
                                   </tr>
-</table>
+                              </table>
                                 </div>`);
 
             var insertPlace = $('#id-div-insert');

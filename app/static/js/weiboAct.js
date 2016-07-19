@@ -3,7 +3,7 @@
  */
 var tweet_selected = function ($self) {
     //推荐使用.data('id')去接data-id的值
-    var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
+    var tweetID = $self.parentsUntil('#id-div-insert').last().data('id');
     log('tweetID, ', tweetID);
     var form = {};
     form['id'] = tweetID;
@@ -21,15 +21,16 @@ var tweet_chosen = function ($self) {
 // 展开评论区
 var comment_open = function ($self) {
     var tweetSelf = tweet_chosen($self);
+    // log('tweetSelf', tweetSelf.data('id'));
     var form = {
-        id: $self.data('id')
+        id: tweetSelf.data('id')
     };
     log('form是：', form.id);
-    log('选中了tweet', tweetSelf);
     var success = function (r) {
         log('成功后返回的r为：', r);
         if (r.success) {
             log('r.message: ', r.message);
+            $self.html('收起评论');
             var comment_zone = $(`<div class="list-group"></div>`);
             var comment_item;
             for (var i=0; i<r.data.length; i++) {
@@ -53,6 +54,15 @@ var comment_open = function ($self) {
         log('reg, ', err);
     };
     weibo.comment_open(form, success, error);
+};
+
+
+// 关闭评论区
+var comment_close = function ($self) {
+    $self.html('评论');
+    var tweetSelf = tweet_chosen($self);
+    var comment_zone = tweetSelf.next();
+    comment_zone.remove();
 };
 
 
@@ -152,7 +162,7 @@ weibo.tweet_comment = function (form, success, error) {
 };
 
 weibo.comment_open = function (form, success, error) {
-    url = 'api/comment/open';
+    url = '/api/comment/open';
     weibo.post(url, form, success, error);
 };
 
