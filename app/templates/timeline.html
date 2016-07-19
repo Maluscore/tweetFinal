@@ -16,7 +16,11 @@
             {
                 tweet_delete($self);
             }
-        })
+        });
+        $('#id-div-insert').on('click', '.icon-comment', function () {
+            var $self = $(this);
+            comment_open($self);
+        });
     };
 
     var __main = function () {

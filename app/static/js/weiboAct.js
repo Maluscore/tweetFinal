@@ -2,12 +2,58 @@
  * Created by PGH on 2016/7/13.
  */
 var tweet_selected = function ($self) {
+    //推荐使用.data('id')去接data-id的值
     var tweetID = $self.parentsUntil('#id-div-insert').last().attr('data-id');
     log('tweetID, ', tweetID);
     var form = {};
     form['id'] = tweetID;
     return form;
 };
+
+
+// 换一种方式去得到所选中的tweet
+var tweet_chosen = function ($self) {
+    var tweetSelf = $self.closest('.panel');
+    return tweetSelf
+};
+
+
+// 展开评论区
+var comment_open = function ($self) {
+    var tweetSelf = tweet_chosen($self);
+    var form = {
+        id: $self.data('id')
+    };
+    log('选中了tweet', tweetSelf);
+    var success = function (r) {
+        log('成功后返回的r为：', r);
+        if (r.success) {
+            log('r.message: ', r.message);
+            var comment_zone = $(`<div class="list-group"></div>`);
+            var comment_item;
+            for (var i=0; i<r.data.length; i++) {
+                comment_item = (`<i class="list-group-item"><h4>${r.data[i].sender_name}</h4><p>${r.data[i].content}</p></i>`);
+                comment_zone.append(comment_item);
+            }
+            log('拼凑成功', comment_zone);
+            var comment_form = (`    <div class="input-group">
+                    <input type="text" class="form-control" placeholder="评论..." id="id-input-comment">
+                    <span class="input-group-btn">
+                        <button class="btn" id="id-btn-sub" style="background: #EEEEEE;">评论</button>
+                    </span>
+            </div>`);
+            comment_zone.append(comment_form);
+            tweetSelf.after(comment_zone);
+        } else {
+            alert('展开评论区失败')
+        }
+    };
+    var error = function (err) {
+        log('reg, ', err);
+    };
+    weibo.comment_open(form, success, error);
+};
+
 
 // 删除
 var tweet_delete = function ($self) {
@@ -103,6 +149,11 @@ weibo.tweet_comment = function (form, success, error) {
     url = '/api/tweet/comment';
     weibo.post(url, form, success, error);
 };
+
+weibo.comment_open = function (form, success, error) {
+    url = 'api/comment/open';
+    weibo.post(url, form, success, error);
+}
 
 weibo.tweet_thumbs_up = function (form, success, error) {
     url = '/api/tweet/thumbs_up';
