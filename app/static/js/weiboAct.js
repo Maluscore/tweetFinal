@@ -31,7 +31,7 @@ var comment_open = function ($self) {
         if (r.success) {
             log('r.message: ', r.message);
             $self.html('收起评论');
-            var comment_zone = $(`<div class="list-group"></div>`);
+            var comment_zone = $(`<div class="list-group" id="id-div-comment"></div>`);
             var comment_item;
             for (var i=0; i<r.data.length; i++) {
                 comment_item = (`<i class="list-group-item"><h4>${r.data[i].sender_name}</h4><p>${r.data[i].content}</p></i>`);
@@ -41,7 +41,7 @@ var comment_open = function ($self) {
             var comment_form = (`    <div class="input-group">
                     <input type="text" class="form-control" placeholder="评论..." id="id-input-comment">
                     <span class="input-group-btn">
-                        <button class="btn" id="id-btn-sub" style="background: #EEEEEE;">评论</button>
+                        <button class="btn" id="id-btn-comment" style="background: #EEEEEE;">评论</button>
                     </span>
             </div>`);
             comment_zone.append(comment_form);
@@ -63,6 +63,41 @@ var comment_close = function ($self) {
     var tweetSelf = tweet_chosen($self);
     var comment_zone = tweetSelf.next();
     comment_zone.remove();
+};
+
+
+// 获得评论内容
+var commentForm = function ($self) {
+    var commentContent = $('id-input-comment').val();
+    var formSelf = $self.closest('.list-group');
+    var tweetID = formSelf.prev().data('id');
+    log('tweetID', tweetID);
+    var form = {
+        content: commentContent,
+        id: tweetID
+    };
+    log('form is:', form);
+    return form;
+};
+
+
+// 组装发送评论的函数
+var add_comment = function ($self) {
+    var form = commentForm($self);
+    var formSelf = $self.closest('.list-group')
+    var success = function (r) {
+        if (r.success) {
+            log('r.message:', r.message);
+            var added
+            formSelf.append(added);
+        }else {
+            alert('评论失败！');
+        }
+    };
+    var error = function (err) {
+        log('reg, ', err);
+    };
+    weibo.tweet_comment(form, success, error);
 };
 
 

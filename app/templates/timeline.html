@@ -11,12 +11,10 @@
             tweet_add();
         });
         $('#id-div-insert').on('click', '.icon-remove', function () {
-            log('test test');
             var $self = $(this);
             tweet_delete($self);
         });
         $('#id-div-insert').on('click', '.icon-comment', function () {
-            log('触发事件');
             var $self = $(this);
             var status = $self.text();
             if (status == '评论'){
@@ -24,6 +22,11 @@
             } else if (status == '收起评论') {
                 comment_close($self)
             }
+        });
+        $('#id-div-insert').on('click', '#id-btn-comment', function () {
+            log('准备添加评论');
+            var $self = $(this);
+            add_comment($self);
         });
     };
 
