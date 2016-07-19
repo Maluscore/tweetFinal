@@ -65,7 +65,6 @@ var tweet_add = function () {
                                   </tr>
                               </table>
                                 </div>`);
-
             var insertPlace = $('#id-div-insert');
             insertPlace.prepend(addContent);
         }else {

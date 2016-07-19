@@ -34,7 +34,7 @@ var comment_open = function ($self) {
             var comment_zone = $(`<div class="list-group" id="id-div-comment"></div>`);
             var comment_item;
             for (var i=0; i<r.data.length; i++) {
-                comment_item = (`<i class="list-group-item"><h4>${r.data[i].sender_name}</h4><p>${r.data[i].content}</p></i>`);
+                comment_item = (`<i class="list-group-item"><h4>${r.data[i].sender_name}<small>${r.data[i].created_time}</small></h4><p>${r.data[i].content}</p></i>`);
                 comment_zone.append(comment_item);
             }
             log('拼凑成功', comment_zone);
@@ -44,7 +44,7 @@ var comment_open = function ($self) {
                         <button class="btn" id="id-btn-comment" style="background: #EEEEEE;">评论</button>
                     </span>
             </div>`);
-            comment_zone.append(comment_form);
+            comment_zone.prepend(comment_form);
             tweetSelf.after(comment_zone);
         } else {
             alert('展开评论区失败')
@@ -68,7 +68,9 @@ var comment_close = function ($self) {
 
 // 获得评论内容
 var commentForm = function ($self) {
-    var commentContent = $('id-input-comment').val();
+    var commentForm = $('#id-input-comment');
+    var commentContent = commentForm.val();
+    commentForm.val('');
     var formSelf = $self.closest('.list-group');
     var tweetID = formSelf.prev().data('id');
     log('tweetID', tweetID);
@@ -76,7 +78,7 @@ var commentForm = function ($self) {
         content: commentContent,
         id: tweetID
     };
-    log('form is:', form);
+    log('content is:', form.content);
     return form;
 };
 
@@ -88,7 +90,7 @@ var add_comment = function ($self) {
     var success = function (r) {
         if (r.success) {
             log('r.message:', r.message);
-            var added
+            var added = (`<i class="list-group-item"><h4>${r.data.sender_name}<small>${r.data.created_time}</small></h4><p>${r.data.content}</p></i>`)
             formSelf.append(added);
         }else {
             alert('评论失败！');
@@ -110,7 +112,13 @@ var tweet_delete = function ($self) {
         if (r.success) {
             log(r.message);
             var tweetForm = $self.parentsUntil('#id-div-insert').last();
+            var next_div = tweetForm.next();
+            log(next_div.attr('id'));
             tweetForm.remove();
+            // 删除没有收起评论的部分，必须是双引号。。。
+            if (next_div.attr('id') === "id-div-comment"){
+                next_div.remove();
+            }
         } else {
             alert('删除失败！')
         }
@@ -141,25 +149,25 @@ var tweet_share = function (tweetID) {
     weibo.tweet_delete(form, success, error);
 };
 
-// 评论
-var tweet_comment = function (tweetID) {
-    var form = {
-        id: "tweetID"
-    };
-    var success = function (r) {
-        log('r, ', r);
-        if (r.success) {
-            log(r.message);
-            // $('#id-tweet-' + r.data.id).empty();
-        } else {
-            alert('删除失败！')
-        }
-    };
-    var error = function (err) {
-        log('reg, ', err);
-    };
-    weibo.tweet_delete(form, success, error);
-};
+// // 评论
+// var tweet_comment = function () {
+//     var form = {
+//         id: "tweetID"
+//     };
+//     var success = function (r) {
+//         log('r, ', r);
+//         if (r.success) {
+//             log(r.message);
+//             // $('#id-tweet-' + r.data.id).empty();
+//         } else {
+//             alert('删除失败！')
+//         }
+//     };
+//     var error = function (err) {
+//         log('reg, ', err);
+//     };
+//     weibo.tweet_delete(form, success, error);
+// };
 
 // 点赞
 var tweet_thumbs_up = function (tweetID) {
