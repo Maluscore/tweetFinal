@@ -11,13 +11,13 @@
             tweet_add();
         });
         $('#id-div-insert').on('click', '.icon-remove', function () {
+            log('test test');
             var $self = $(this);
-            if ({{current_user.id}} == $self.attr('data-id'))
-            {
-                tweet_delete($self);
-            }
+            tweet_delete($self);
         });
         $('#id-div-insert').on('click', '.icon-comment', function () {
+            alert('debug');
+            log('触发事件');
             var $self = $(this);
             comment_open($self);
         });
@@ -81,7 +81,7 @@
             <div class="panel panel-default" data-id={{t.id}}>
                 <div class="panel-heading">
                     <p class="panel-title">{{t.sender_name}}
-                        <a class="btn pull-right"><i class="icon-remove" title="删除" data-id="{{t.user_id}}"></i></a>
+                        <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
                         <br>{{t.created_time | formatted_time}}
                     </p>
                 </div>
@@ -92,7 +92,7 @@
                     <tr>
                         <td>
                             <a class="btn">
-                                <i class=" icon-share-alt"></i>转发</a>
+                                <i class="icon-share-alt"></i>转发</a>
                         </td>
                         <td>
                             <a class="btn">

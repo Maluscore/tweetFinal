@@ -24,6 +24,7 @@ var comment_open = function ($self) {
     var form = {
         id: $self.data('id')
     };
+    log('form是：', form.id);
     log('选中了tweet', tweetSelf);
     var success = function (r) {
         log('成功后返回的r为：', r);
@@ -153,7 +154,7 @@ weibo.tweet_comment = function (form, success, error) {
 weibo.comment_open = function (form, success, error) {
     url = 'api/comment/open';
     weibo.post(url, form, success, error);
-}
+};
 
 weibo.tweet_thumbs_up = function (form, success, error) {
     url = '/api/tweet/thumbs_up';

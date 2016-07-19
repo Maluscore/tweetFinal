@@ -42,9 +42,11 @@ def tweet_delete():
     t = Tweet.query.filter_by(id=form['id']).first()
     r = dict(
         success=True,
-        message='删除成功！'
+        message='去除成功！'
     )
     print('debug t,', t.deleted)
-    t.deleted = 1
-    t.save()
+    if current_user().id == t.user_id:
+        t.deleted = 1
+        t.save()
+        r['message'] = '删除成功'
     return jsonify(r)
