@@ -6,8 +6,6 @@ from flask import request
 from flask import jsonify
 
 
-
-
 # 展开评论
 @main.route('/comment/open', methods=['POST'])
 def comment_open():
@@ -28,6 +26,24 @@ def comment_open():
     return jsonify(r)
 
 
+# 关闭评论
+@main.route('/comment/close', methods=['POST'])
+def comment_close():
+    form = request.get_json()
+    print('关闭评论，form是：', form)
+    tweet_id = form.get('id')
+    tweet = Tweet.query.filter_by(id=tweet_id).first()
+    data = {
+        'com_count': tweet.com_count,
+    }
+    r = dict(
+        message='展开成功!',
+        success=True,
+        data=data,
+    )
+    return jsonify(r)
+
+
 # 处理评论
 @main.route('/tweet/comment', methods=['POST'])
 def comment_add():
@@ -44,6 +60,9 @@ def comment_add():
         message='评论成功！',
         data=c.json(),
     )
+    t = Tweet.query.filter_by(id=form['id']).first()
+    t.com_count += 1
+    t.save()
     if len(form['content']) < 1:
         r['success'] = False
         r['message'] = '评论失败'

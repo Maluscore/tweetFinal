@@ -17,10 +17,13 @@
         $('#id-div-insert').on('click', '.icon-comment', function () {
             var $self = $(this);
             var status = $self.text();
-            if (status == '评论'){
-                comment_open($self);
-            } else if (status == '收起评论') {
+//            if (status == '评论'){
+//                comment_open($self);
+//            } else
+            if (status == '收起评论') {
                 comment_close($self)
+            }else {
+                comment_open($self);
             }
         });
         $('#id-div-insert').on('click', '#id-btn-comment', function () {
@@ -101,7 +104,7 @@
                             <a class="btn icon-share-alt">转发</a>
                         </td>
                         <td>
-                            <a class="btn icon-comment">评论</a>
+                            <a class="btn icon-comment">评论{{t.com_count}}</a>
                         </td>
                         <td>
                             <a class="btn icon-thumbs-up">赞</a>

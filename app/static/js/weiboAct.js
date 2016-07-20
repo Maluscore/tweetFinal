@@ -59,10 +59,25 @@ var comment_open = function ($self) {
 
 // 关闭评论区
 var comment_close = function ($self) {
-    $self.html('评论');
     var tweetSelf = tweet_chosen($self);
+    var form = {
+        id: tweetSelf.data('id')
+    };
     var comment_zone = tweetSelf.next();
-    comment_zone.remove();
+    var success = function (r) {
+        if (r.success) {
+            log('r.message :', r.message);
+            var count = r.data.com_count;
+            $self.html('评论' + count);
+            comment_zone.remove();
+        } else {
+            log(r.message);
+        }
+    };
+    var error = function (err) {
+        log('reg, ', err);
+    };
+    weibo.comment_close(form, success, error);
 };
 
 
@@ -86,12 +101,16 @@ var commentForm = function ($self) {
 // 组装发送评论的函数
 var add_comment = function ($self) {
     var form = commentForm($self);
-    var formSelf = $self.closest('.list-group')
+    var formSelf = $self.closest('.list-group');
     var success = function (r) {
         if (r.success) {
             log('r.message:', r.message);
             var added = (`<i class="list-group-item"><h4>${r.data.sender_name}<small>${r.data.created_time}</small></h4><p>${r.data.content}</p></i>`)
             formSelf.append(added);
+            var count = $('#id-span-count');
+            var num = count.val();
+            log('num', num);
+            count.val(num + 1);
         }else {
             alert('评论失败！');
         }
@@ -206,6 +225,11 @@ weibo.tweet_comment = function (form, success, error) {
 
 weibo.comment_open = function (form, success, error) {
     url = '/api/comment/open';
+    weibo.post(url, form, success, error);
+};
+
+weibo.comment_close = function (form, success, error) {
+    url = '/api/comment/close';
     weibo.post(url, form, success, error);
 };
 
