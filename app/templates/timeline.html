@@ -41,6 +41,48 @@
             __main();
         });
     </script>
+    <style>
+        #id-div-insert {
+            background-color: #FFFFFF;
+            -webkit-border-radius: 3%;
+            -moz-border-radius: 3%;
+            border-radius: 3%;
+        }
+        #id-div-insert div {
+            outline-width: 1px;
+            outline-style: dotted;
+            outline-color: red;
+        }
+        .pp-flex-row {
+            display: flex;
+            flex-direction: row;
+        }
+        .flex-1 {
+            flex-grow: 1;
+        }
+        .pp-avatar {
+            width: 60px;
+            text-align: center;
+        }
+        .pp-avatar-me {
+            border-radius: 15%;
+        }
+        .pp-panel {
+            border-color: gray;
+            border-bottom-width: 1px;
+            border-bottom-style: dotted;
+            padding: 5px 3px 10px 3px;
+        }
+        .pp-main {
+            margin-left: 3px;
+        }
+        .pp-main-footer {
+            height: 20px;
+            margin-top: 10px;
+        }
+        .pp-weibo-pic {
+        }
+    </style>
 {% endblock %}
 
 {% block timeline %}
@@ -87,161 +129,49 @@
     </div>
     <hr>
     <div id="id-div-insert">
-      <div class="tweet js-stream-tweet js-actionable-tweet js-profile-popup-actionable
-       original-tweet js-original-tweet has-cards  has-content" data-tweet-id="773496797289250816" data-item-id="773496797289250816" data-permalink-path="/Moz/status/773496797289250816" data-screen-name="Moz" data-name="Moz" data-user-id="15651700" data-you-follow="true" data-follows-you="false" data-you-block="false" data-disclosure-type="" data-has-cards="true">
-        <div class="context">
+        <div class="pp-panel pp-flex-row" data-id="1234">
+            <div class="pp-avatar">
+                <img class="pp-avatar-me" src="/static/img/head-min.jpg">
+            </div>
+            <div class="pp-main flex-1">
+                <div class="pp-main-header">
+                    <strong class="pp-full-name">Malus Core</strong>
+                    <span class="pp-timestamp">5 min</span>
+                </div>
+                <div class="pp-main-content">
+                    <p class="pp-weibo-text">What a nice day! I can do this all day!!!</p>
+                </div>
+               <!-- <div class="pp-main-pic">
+                    <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
+                </div> -->
+                <div class="pp-main-footer">
+                    <a class="btn icon-share-alt" title="转发"></a>
+                    <a class="btn icon-comment" title="评论"></a>
+                    <a class="btn icon-thumbs-up" title="赞"></a>
+                </div>
+            </div>
         </div>
-        <div class="content">
-          <div class="stream-item-header">
-              <a class="account-group js-account-group js-action-profile js-user-profile-link js-nav" href="/Moz" data-user-id="15651700">
-              <img class="avatar js-action-profile-avatar" src="https://pbs.twimg.com/profile_images/768568491150487552/TFOYNtFd_bigger.jpg" alt="">
-              <strong class="fullname js-action-profile-name show-popup-with-id" data-aria-label-part="">Moz</strong>
-              <span>&rlm;</span><span class="username js-action-profile-name" data-aria-label-part=""><s>@</s><b>Moz</b></span>
-              </a>
-              <small class="time">
-              <a href="/Moz/status/773496797289250816" class="tweet-timestamp js-permalink js-nav js-tooltip" title="上午5:23 - 2016年9月7日"><span class="_timestamp js-short-timestamp js-relative-timestamp" data-time="1473250982" data-time-ms="1473250982000" data-long-form="true" aria-hidden="true">5分</span><span class="u-hiddenVisually" data-aria-label-part="last">5分钟前</span></a>
-              </small>
-              <button type="button" class="btn-link js-translate-tweet translate-button" data-nav="translate_tweet">
-              <span class="translate-label">查看翻译</span><span class="Icon Icon--translator"></span></button>
-          </div>
-          <div class="js-tweet-text-container">
-            <p class="TweetTextSize  js-tweet-text tweet-text" lang="en" data-aria-label-part="0">Using the Barnacle SEO Method to Prove Local Community Awareness <a href="https://t.co/I08FRVhM4u" rel="nofollow" dir="ltr" data-expanded-url="http://mz.cm/2byySYY" class="twitter-timeline-link" target="_blank" title="http://mz.cm/2byySYY"><span class="tco-ellipsis"></span><span class="invisible">http://</span><span class="js-display-url">mz.cm/2byySYY</span><span class="invisible"></span><span class="tco-ellipsis"><span class="invisible">&nbsp;</span></span></a> By Miriam Ellis<a href="https://t.co/1GEzhfD1xh" class="twitter-timeline-link u-hidden" data-pre-embedded="true" dir="ltr">pic.twitter.com/1GEzhfD1xh</a></p>
-          </div>
-          <button type="button" class="btn-link js-translate-tweet translate-button" data-nav="translate_tweet">查看翻译</button>
-          <div class="tweet-translation needs-translation" data-dest-lang="zh">
-            <div class="translation-attribution">
-              <span>通过<a class="attribution-logo" href="http://aka.ms/Twitter2BingTranslator"><span class="invisible">必应翻译</span></a>来翻译来自<span class="tweet-language">英文</span>的语言</span>
-              <button type="button" class="btn-link js-translation-feedback-button" data-nav="">翻译出错了？</button>
+        <div class="pp-panel pp-flex-row" data-id="1234">
+            <div class="pp-avatar">
+                <img class="pp-avatar-me" src="/static/img/head-min.jpg">
             </div>
-            <p class="tweet-translation-text"></p>
-          </div>
-          <div class="AdaptiveMediais-square">
-            <div class="AdaptiveMedia-containerjs-adaptive-media-container">
-              <div class="AdaptiveMedia-singlePhoto">
-                <div class="AdaptiveMedia-photoContainer js-adaptive-photo " data-image-url="https://pbs.twimg.com/media/CrwDPLaVMAEFqzn.jpg" data-element-context="platform_photo_card">
-                  <img data-aria-label-part="" src="https://pbs.twimg.com/media/CrwDPLaVMAEFqzn.jpg" alt="" style="width: 100%; top: -0px;">
+            <div class="pp-main flex-1">
+                <div class="pp-main-header">
+                    <strong class="pp-full-name">Malus Core</strong>
+                    <span class="pp-timestamp">5 min</span>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="stream-item-footer">
-            <div class="ProfileTweet-actionCountList u-hiddenVisually">
-              <span class="ProfileTweet-action--reply u-hiddenVisually"></span>
-              <span class="ProfileTweet-action--retweet u-hiddenVisually">
-                <span class="ProfileTweet-actionCount" aria-hidden="true" data-tweet-stat-count="0">
-                  <span class="ProfileTweet-actionCountForAria">0 转推</span>
-                </span>
-              </span>
-              <span class="ProfileTweet-action--favorite u-hiddenVisually">
-                <span class="ProfileTweet-actionCount" aria-hidden="true" data-tweet-stat-count="0">
-                  <span class="ProfileTweet-actionCountForAria">0 赞</span>
-                </span>
-              </span>
-            </div>
-            <div class="ProfileTweet-actionList js-actions" role="group" aria-label="发推行为">
-              <div class="ProfileTweet-action ProfileTweet-action--reply">
-                <button class="ProfileTweet-actionButton u-textUserColorHover js-actionButton js-actionReply" data-modal="ProfileTweet-reply" type="button">
-                <div class="IconContainer js-tooltip" title="回复">
-                  <span class="Icon Icon--reply"></span>
-                  <span class="u-hiddenVisually">回复</span>
+                <div class="pp-main-content">
+                    <p class="pp-weibo-text">What a nice day! I can do this all day!!!</p>
                 </div>
-               </button>
-              </div>
-              <div class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt">
-                <button class="ProfileTweet-actionButton  js-actionButton js-actionRetweet" data-modal="ProfileTweet-retweet" type="button">
-                  <div class="IconContainer js-tooltip" title="转推">
-                    <span class="Icon Icon--retweet"></span>
-                    <span class="u-hiddenVisually">转推</span>
-                  </div>
-                  <div class="IconTextContainer">
-                    <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero">
-                      <span class="ProfileTweet-actionCountForPresentation" aria-hidden="true"></span>
-                    </span>
-                  </div>
-                </button>
-                <button class="ProfileTweet-actionButtonUndo js-actionButton js-actionRetweet" data-modal="ProfileTweet-retweet" type="button">
-                  <div class="IconContainer js-tooltip" title="撤销转推">
-                    <span class="Icon Icon--retweet"></span>
-                    <span class="u-hiddenVisually">已转推</span>
-                  </div>
-                  <div class="IconTextContainer">
-                    <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero">
-                      <span class="ProfileTweet-actionCountForPresentation" aria-hidden="true"></span>
-                    </span>
-                  </div>
-                </button>
-              </div>
-              <div class="ProfileTweet-action ProfileTweet-action--favorite js-toggleState">
-                <button class="ProfileTweet-actionButton js-actionButton js-actionFavorite" type="button">
-                  <div class="IconContainer js-tooltip" title="喜欢">
-                    <div class="HeartAnimationContainer">
-                      <div class="HeartAnimation"></div>
-                    </div>
-                    <span class="u-hiddenVisually">喜欢</span>
-                  </div>
-                  <div class="IconTextContainer">
-                    <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero">
-                      <span class="ProfileTweet-actionCountForPresentation" aria-hidden="true"></span>
-                    </span>
-                  </div>
-                </button>
-                <button class="ProfileTweet-actionButtonUndo u-linkClean js-actionButton js-actionFavorite" type="button">
-                  <div class="IconContainer js-tooltip" title="撤销喜欢">
-                    <div class="HeartAnimationContainer">
-                      <div class="HeartAnimation"></div>
-                    </div>
-                    <span class="u-hiddenVisually">喜欢</span>
-                  </div>
-                  <div class="IconTextContainer">
-                    <span class="ProfileTweet-actionCount ProfileTweet-actionCount--isZero">
-                      <span class="ProfileTweet-actionCountForPresentation" aria-hidden="true"></span>
-                    </span>
-                  </div>
-                </button>
-              </div>
-              <div class="ProfileTweet-action ProfileTweet-action--more js-more-ProfileTweet-actions">
-                <div class="dropdown">
-                  <button class="ProfileTweet-actionButton u-textUserColorHover dropdown-toggle js-dropdown-toggle" type="button" aria-haspopup="true">
-                    <div class="IconContainer js-tooltip" title="更多">
-                      <span class="Icon Icon--dots"></span>
-                     <span class="u-hiddenVisually">更多</span>
-                    </div>
-                  </button>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-caret">
-                      <div class="caret-outer"></div>
-                      <div class="caret-inner"></div>
-                    </div>
-                    <ul>
-                      <li class="share-via-dm js-actionShareViaDM" data-nav="share_tweet_dm">
-                        <button type="button" class="dropdown-link">私信分享</button>
-                      </li>
-                      <li class="copy-link-to-tweet js-actionCopyLinkToTweet">
-                        <button type="button" class="dropdown-link">复制推文链接</button>
-                      </li>
-                      <li class="embed-link js-actionEmbedTweet" data-nav="embed_tweet">
-                        <button type="button" class="dropdown-link">嵌入推文</button>
-                      </li>
-                        <li class="mute-user-item pretty-link"><button type="button" class="dropdown-link">隐藏</button></li>
-                      <li class="unmute-user-item pretty-link"><button type="button" class="dropdown-link">取消静音</button></li>
-                      <li class="block-link js-actionBlock" data-nav="block">
-                        <button type="button" class="dropdown-link">屏蔽</button>
-                      </li>
-                      <li class="unblock-link js-actionUnblock" data-nav="unblock">
-                        <button type="button" class="dropdown-link">取消屏蔽</button>
-                      </li>
-                      <li class="report-link js-actionReport" data-nav="report">
-                        <button type="button" class="dropdown-link">
-                            报告
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+               <!-- <div class="pp-main-pic">
+                    <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
+                </div> -->
+                <div class="pp-main-footer">
+                    <a class="btn icon-share-alt" title="转发"></a>
+                    <a class="btn icon-comment" title="评论"></a>
+                    <a class="btn icon-thumbs-up" title="赞"></a>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 {% endblock %}
