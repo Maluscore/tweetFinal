@@ -62,6 +62,7 @@ def comment_add():
     else:
         c.tweet_id = form['id']
         c.sender_name = u.username
+        r['data'] = c.json()
         c.save()
         print('comment is :', c)
         t = Tweet.query.filter_by(id=form['id']).first()

@@ -41,30 +41,31 @@ var tweet_add = function () {
         log('r, ', r);
         if (r.success){
             log(r.message);
-            var addContent = (`<div class="panel panel-default" data-id="${r.data.id}">
-                                  <div class="panel-heading">
-                                    <p class="panel-title">${r.data.username}
-                                    <a class="btn pull-right"><button class="icon-remove btn btn-default" title="删除"></button></a>
-                                    <br>${r.data.created_time}
-                                    </p>
-                                  </div>
-                                  <div class="panel-body">
-                                    ${r.data.content}
-                                  </div>
-                              <table class="table">
-                                  <tr>
-                                  <td>
-                                      <a class="btn icon-share-alt">转发</a>
-                                  </td>
-                                  <td>
-                                      <a class="btn icon-comment">评论</a>
-                                  </td>
-                                  <td>
-                                      <a class="btn icon-thumbs-up">赞</a>
-                                  </td>
-                                  </tr>
-                              </table>
-                                </div>`);
+            var addContent = (`
+                        <div class="pp-panel pp-flex-row" data-id="${r.data.id}">
+                            <div class="pp-avatar pp-avatar-config">
+                                <img class="pp-avatar-me" src="/static/img/head-min.jpg">
+                            </div>
+                            <div class="pp-main flex-1">
+                                <div class="pp-main-header">
+                                    <strong class="pp-full-name">${r.data.username}</strong>
+                                    <span class="pp-timestamp">${r.data.created_time}</span>
+                                    <a class="icon-remove btn" title="删除"></a>
+                                </div>
+                                <div class="pp-main-content">
+                                    <p class="pp-weibo-text">${r.data.content} What a nice day!</p>
+                                </div>
+                               <!-- <div class="pp-main-pic">
+                                    <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
+                                </div> -->
+                                <div class="pp-main-footer">
+                                    <a class="btn icon-share-alt" title="转发">2</a>
+                                    <a class="btn icon-comment" title="评论"></a>
+                                    <a class="btn icon-thumbs-up" title="赞">5</a>
+                                </div>
+                            </div>
+                        </div>
+                                `);
             var insertPlace = $('#id-div-insert');
             insertPlace.prepend(addContent);
         }else {
