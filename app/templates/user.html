@@ -3,6 +3,7 @@
 {% block head %}
     {{ super() }}
     <link rel="stylesheet" href="/static/css/buttons.css">
+    <link rel="stylesheet" href="/static/css/pp-basic.css">
     <script src="/static/js/weibo.js"></script>
     <script src="/static/js/weiboAct.js"></script>
     <script src="/static/js/userAct.js"></script>
@@ -69,32 +70,28 @@
     <hr>
     <div id="id-div-insert">
         {% for t in tweets %}
-            <div class="panel panel-default" data-id={{t.id}}>
-                <div class="panel-heading">
-                    <p class="panel-title">{{user.username}}
-                        <a class="btn pull-right"><i class="icon-remove" title="删除"></i></a>
-                        <br>{{t.created_time | formatted_time}}
-                    </p>
+            <div class="pp-panel pp-flex-row" data-id="{{ t.id }}">
+                <div class="pp-avatar pp-avatar-config">
+                    <img class="pp-avatar-me" src="/static/img/head-min.jpg">
                 </div>
-                <div class="panel-body">
-                    {{t.content}}
+                <div class="pp-main flex-1">
+                    <div class="pp-main-header">
+                        <strong class="pp-full-name">{{ t.sender_name }}</strong>
+                        <span class="pp-timestamp">{{ t.created_time }}</span>
+                        <a class="icon-remove btn" title="删除"></a>
+                    </div>
+                    <div class="pp-main-content">
+                        <p class="pp-weibo-text">{{ t.content }} What a nice day!</p>
+                    </div>
+                   <!-- <div class="pp-main-pic">
+                        <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
+                    </div> -->
+                    <div class="pp-main-footer">
+                        <a class="btn icon-share-alt" title="转发"> 2</a>
+                        <a class="btn icon-comment" title="评论"> {{ t.com_count }}</a>
+                        <a class="btn icon-thumbs-up" title="赞"> 5</a>
+                    </div>
                 </div>
-                <table class="table">
-                    <tr>
-                        <td>
-                            <a class="btn">
-                                <i class=" icon-share-alt"></i>转发</a>
-                        </td>
-                        <td>
-                            <a class="btn">
-                                <i class="icon-comment"></i>评论</a>
-                        </td>
-                        <td>
-                            <a class="btn">
-                                <i class="icon-thumbs-up"></i>赞</a>
-                        </td>
-                    </tr>
-                </table>
             </div>
         {% endfor %}
     </div>
