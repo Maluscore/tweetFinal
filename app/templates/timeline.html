@@ -20,7 +20,7 @@
 //            if (status == '评论'){
 //                comment_open($self);
 //            } else
-                if (status == '收起评论') {
+                if (status == '收起') {
                     comment_close($self)
                 } else {
                     comment_open($self);
@@ -80,7 +80,13 @@
             height: 20px;
             margin-top: 10px;
         }
+        .pp-main-header a {
+            float: right;
+        }
         .pp-weibo-pic {
+        }
+        .pp-comment-avatar {
+            width: 50px;
         }
     </style>
 {% endblock %}
@@ -129,49 +135,30 @@
     </div>
     <hr>
     <div id="id-div-insert">
-        <div class="pp-panel pp-flex-row" data-id="1234">
+    {% for t in tweets %}
+        <div class="pp-panel pp-flex-row" data-id="{{ t.id }}">
             <div class="pp-avatar">
                 <img class="pp-avatar-me" src="/static/img/head-min.jpg">
             </div>
             <div class="pp-main flex-1">
                 <div class="pp-main-header">
-                    <strong class="pp-full-name">Malus Core</strong>
-                    <span class="pp-timestamp">5 min</span>
+                    <strong class="pp-full-name">{{ t.sender_name }}</strong>
+                    <span class="pp-timestamp">{{ t.created_time }}</span>
+                    <a class="icon-remove btn" title="删除"></a>
                 </div>
                 <div class="pp-main-content">
-                    <p class="pp-weibo-text">What a nice day! I can do this all day!!!</p>
+                    <p class="pp-weibo-text">{{ t.content }} What a nice day!</p>
                 </div>
                <!-- <div class="pp-main-pic">
                     <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
                 </div> -->
                 <div class="pp-main-footer">
-                    <a class="btn icon-share-alt" title="转发"></a>
-                    <a class="btn icon-comment" title="评论"></a>
-                    <a class="btn icon-thumbs-up" title="赞"></a>
+                    <a class="btn icon-share-alt" title="转发">2</a>
+                    <a class="btn icon-comment" title="评论">3</a>
+                    <a class="btn icon-thumbs-up" title="赞">5</a>
                 </div>
             </div>
         </div>
-        <div class="pp-panel pp-flex-row" data-id="1234">
-            <div class="pp-avatar">
-                <img class="pp-avatar-me" src="/static/img/head-min.jpg">
-            </div>
-            <div class="pp-main flex-1">
-                <div class="pp-main-header">
-                    <strong class="pp-full-name">Malus Core</strong>
-                    <span class="pp-timestamp">5 min</span>
-                </div>
-                <div class="pp-main-content">
-                    <p class="pp-weibo-text">What a nice day! I can do this all day!!!</p>
-                </div>
-               <!-- <div class="pp-main-pic">
-                    <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
-                </div> -->
-                <div class="pp-main-footer">
-                    <a class="btn icon-share-alt" title="转发"></a>
-                    <a class="btn icon-comment" title="评论"></a>
-                    <a class="btn icon-thumbs-up" title="赞"></a>
-                </div>
-            </div>
-        </div>
+    {% endfor %}
     </div>
 {% endblock %}

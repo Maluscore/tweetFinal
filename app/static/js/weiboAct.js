@@ -3,7 +3,7 @@
  */
 var tweet_selected = function ($self) {
     //推荐使用.data('id')去接data-id的值
-    var tweetID = $self.parentsUntil('#id-div-insert').last().data('id');
+    var tweetID = $self.parents('.pp-panel').data('id');
     log('tweetID, ', tweetID);
     var form = {};
     form['id'] = tweetID;
@@ -13,7 +13,7 @@ var tweet_selected = function ($self) {
 
 // 换一种方式去得到所选中的tweet
 var tweet_chosen = function ($self) {
-    var tweetSelf = $self.closest('.panel');
+    var tweetSelf = $self.closest('.pp-panel');
     return tweetSelf
 };
 
@@ -30,20 +30,43 @@ var comment_open = function ($self) {
         log('成功后返回的r为：', r);
         if (r.success) {
             log('r.message: ', r.message);
-            $self.html('收起评论');
-            var comment_zone = $(`<div class="list-group" id="id-div-comment"></div>`);
+            $self.html('收起');
+            var comment_zone = $(`<div class="pp-comment-group" id="id-div-comment"></div>`);
             var comment_item;
             for (var i=0; i<r.data.length; i++) {
-                comment_item = (`<i class="list-group-item"><h4>${r.data[i].sender_name}<small>${r.data[i].created_time}</small></h4><p>${r.data[i].content}</p></i>`);
+                comment_item = (`
+                    <div class="pp-comment-item pp-flex-row">
+                        <div class="pp-comment-avatar">
+                            <img class="pp-avatar-u" src="/static/img/comment-avatar">
+                        </div>
+                        <div class="pp-comment-main flex-1">
+                            <div class="pp-comment-content">
+                                <p><span>${r.data[i].sender_name}</span>${r.data[i].content}</p>
+                             </div>
+                            <div class="pp-comment-fotter">
+                                <time>${r.data[i].created_time}</time>
+                            </div>
+                        </div>
+                     </div>
+                
+                
+                
+                <!-- <i class="list-comment-item">
+                    <h4>${r.data[i].sender_name}<small>${r.data[i].created_time}</small></h4>
+                    <p>${r.data[i].content}</p>
+                    </i> -=>
+                `);
                 comment_zone.append(comment_item);
             }
             log('拼凑成功', comment_zone);
-            var comment_form = (`    <div class="input-group">
+            var comment_form = (`
+                <div class="input-group">
                     <input type="text" class="form-control" placeholder="评论..." id="id-input-comment">
                     <span class="input-group-btn">
                         <button class="btn" id="id-btn-comment" style="background: #EEEEEE;">评论</button>
                     </span>
-            </div>`);
+                </div>
+            `);
             comment_zone.prepend(comment_form);
             tweetSelf.after(comment_zone);
         } else {
@@ -68,7 +91,7 @@ var comment_close = function ($self) {
         if (r.success) {
             log('r.message :', r.message);
             var count = r.data.com_count;
-            $self.html('评论' + count);
+            $self.html(count);
             comment_zone.remove();
         } else {
             log(r.message);
@@ -83,7 +106,8 @@ var comment_close = function ($self) {
 
 // 获得评论内容
 var commentForm = function ($self) {
-    var commentForm = $('#id-input-comment');
+    var commentForm = $self.parent().prev('#id-input-comment');
+    log('commentForm', commentForm);
     var commentContent = commentForm.val();
     commentForm.val('');
     var formSelf = $self.closest('.list-group');
