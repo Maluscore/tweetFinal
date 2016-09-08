@@ -60,9 +60,11 @@
         .flex-1 {
             flex-grow: 1;
         }
+        .pp-avatar-config {
+            text-align: center;
+        }
         .pp-avatar {
             width: 60px;
-            text-align: center;
         }
         .pp-avatar-me {
             border-radius: 15%;
@@ -87,6 +89,24 @@
         }
         .pp-comment-avatar {
             width: 50px;
+        }
+        .pp-comment-group {
+            border-color: black;
+            border-bottom-width: 1px;
+            border-bottom-style: dotted;
+            padding: 5px 3px 10px 3px;
+        }
+        .pp-comment-item {
+            border-color: lightcoral;
+            border-bottom-width: 1px;
+            border-bottom-style: dotted;
+            padding: 5px 3px 3px 3px;
+        }
+        .pp-comment-content p {
+            margin-bottom: 3px;
+        }
+        .pp-comment-content span {
+            font-weight: bold;
         }
     </style>
 {% endblock %}
@@ -137,7 +157,7 @@
     <div id="id-div-insert">
     {% for t in tweets %}
         <div class="pp-panel pp-flex-row" data-id="{{ t.id }}">
-            <div class="pp-avatar">
+            <div class="pp-avatar pp-avatar-config">
                 <img class="pp-avatar-me" src="/static/img/head-min.jpg">
             </div>
             <div class="pp-main flex-1">

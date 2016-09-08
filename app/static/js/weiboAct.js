@@ -36,25 +36,18 @@ var comment_open = function ($self) {
             for (var i=0; i<r.data.length; i++) {
                 comment_item = (`
                     <div class="pp-comment-item pp-flex-row">
-                        <div class="pp-comment-avatar">
-                            <img class="pp-avatar-u" src="/static/img/comment-avatar">
+                        <div class="pp-comment-avatar pp-avatar-config">
+                            <img class="pp-avatar-u" src="/static/img/comment-avatar.jpg">
                         </div>
                         <div class="pp-comment-main flex-1">
                             <div class="pp-comment-content">
-                                <p><span>${r.data[i].sender_name}</span>${r.data[i].content}</p>
+                                <p><span>${r.data[i].sender_name} :  </span>${r.data[i].content}</p>
                              </div>
                             <div class="pp-comment-fotter">
                                 <time>${r.data[i].created_time}</time>
                             </div>
                         </div>
-                     </div>
-                
-                
-                
-                <!-- <i class="list-comment-item">
-                    <h4>${r.data[i].sender_name}<small>${r.data[i].created_time}</small></h4>
-                    <p>${r.data[i].content}</p>
-                    </i> -=>
+                     </div>                
                 `);
                 comment_zone.append(comment_item);
             }
@@ -110,7 +103,7 @@ var commentForm = function ($self) {
     log('commentForm', commentForm);
     var commentContent = commentForm.val();
     commentForm.val('');
-    var formSelf = $self.closest('.list-group');
+    var formSelf = $self.closest('.pp-comment-group');
     var tweetID = formSelf.prev().data('id');
     log('tweetID', tweetID);
     var form = {
@@ -125,11 +118,16 @@ var commentForm = function ($self) {
 // 组装发送评论的函数
 var add_comment = function ($self) {
     var form = commentForm($self);
-    var formSelf = $self.closest('.list-group');
+    var formSelf = $self.closest('.pp-comment-group');
     var success = function (r) {
         if (r.success) {
             log('r.message:', r.message);
-            var added = (`<i class="list-group-item"><h4>${r.data.sender_name}<small>${r.data.created_time}</small></h4><p>${r.data.content}</p></i>`)
+            var added = (`
+                <i class="list-group-item">
+                <h4>${r.data.sender_name}<small>${r.data.created_time}</small></h4>
+                <p>${r.data.content}</p>
+                </i>
+            `);
             formSelf.append(added);
             var count = $('#id-span-count');
             var num = count.val();
