@@ -51,20 +51,21 @@ def comment_add():
     form = request.get_json()
     print('AJAX传递成功，form是：', form)
     c = Comment(form)
-    c.tweet_id = form['id']
-    c.sender_name = u.username
-    c.save()
-    print('comment is :', c)
     r = dict(
         success=True,
         message='评论成功！',
-        data=c.json(),
+        data='',
     )
-    t = Tweet.query.filter_by(id=form['id']).first()
-    t.com_count += 1
-    t.save()
     if len(form['content']) < 1:
         r['success'] = False
         r['message'] = '评论失败'
+    else:
+        c.tweet_id = form['id']
+        c.sender_name = u.username
+        c.save()
+        print('comment is :', c)
+        t = Tweet.query.filter_by(id=form['id']).first()
+        t.com_count += 1
+        t.save()
     # 不能直接jsonify，因为这个实例
     return jsonify(r)

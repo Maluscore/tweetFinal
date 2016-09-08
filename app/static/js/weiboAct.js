@@ -123,16 +123,21 @@ var add_comment = function ($self) {
         if (r.success) {
             log('r.message:', r.message);
             var added = (`
-                <i class="list-group-item">
-                <h4>${r.data.sender_name}<small>${r.data.created_time}</small></h4>
-                <p>${r.data.content}</p>
-                </i>
+                    <div class="pp-comment-item pp-flex-row">
+                        <div class="pp-comment-avatar pp-avatar-config">
+                            <img class="pp-avatar-u" src="/static/img/comment-avatar.jpg">
+                        </div>
+                        <div class="pp-comment-main flex-1">
+                            <div class="pp-comment-content">
+                                <p><span>${r.data.sender_name} :  </span>${r.data.content}</p>
+                             </div>
+                            <div class="pp-comment-fotter">
+                                <time>${r.data.created_time}</time>
+                            </div>
+                        </div>
+                    </div>
             `);
             formSelf.append(added);
-            var count = $('#id-span-count');
-            var num = count.val();
-            log('num', num);
-            count.val(num + 1);
         }else {
             alert('评论失败！');
         }
