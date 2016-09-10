@@ -31,7 +31,7 @@ var comment_open = function ($self) {
         if (r.success) {
             log('r.message: ', r.message);
             $self.html('收起');
-            var comment_zone = $(`<div class="pp-comment-group" id="id-div-comment"></div>`);
+            var comment_zone = $(`<div class="pp-comment-group" id="id-div-comment" style="display: none;"></div>`);
             var comment_item;
             for (var i=0; i<r.data.length; i++) {
                 comment_item = (`
@@ -62,6 +62,8 @@ var comment_open = function ($self) {
             `);
             comment_zone.prepend(comment_form);
             tweetSelf.after(comment_zone);
+            log('roll down?');
+            comment_zone.slideDown('slow');
         } else {
             alert('展开评论区失败')
         }
@@ -85,7 +87,12 @@ var comment_close = function ($self) {
             log('r.message :', r.message);
             var count = r.data.com_count;
             $self.html(count);
-            comment_zone.remove();
+            var timeDelay = function () {
+                comment_zone.remove();
+
+            };
+            comment_zone.slideUp('slow');
+            setTimeout(timeDelay, 2000);
         } else {
             log(r.message);
         }

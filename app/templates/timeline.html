@@ -17,11 +17,8 @@
             $('#id-div-insert').on('click', '.icon-comment', function () {
                 var $self = $(this);
                 var status = $self.text();
-//            if (status == '评论'){
-//                comment_open($self);
-//            } else
                 if (status == '收起') {
-                    comment_close($self)
+                    comment_close($self);
                 } else {
                     comment_open($self);
                 }
