@@ -19,7 +19,21 @@
         $('a#status').on('click', function () {
             var user_id = {{user.id}};
             user_act(user_id);
-        })
+        });
+        $('#id-div-insert').on('click', '.icon-comment', function () {
+                var $self = $(this);
+                var status = $self.text();
+                if (status == '收起') {
+                    comment_close($self);
+                } else {
+                    comment_open($self);
+                }
+        });
+        $('#id-div-insert').on('click', '#id-btn-comment', function () {
+            log('准备添加评论');
+            var $self = $(this);
+            add_comment($self);
+        });
     };
 
     var __main = function () {
