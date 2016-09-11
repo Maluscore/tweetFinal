@@ -53,7 +53,7 @@ var tweet_add = function () {
                                     <a class="icon-remove btn" title="删除"></a>
                                 </div>
                                 <div class="pp-main-content">
-                                    <p class="pp-weibo-text">${r.data.content} What a nice day!</p>
+                                    <p class="pp-weibo-text">${r.data.content}</p>
                                 </div>
                                <!-- <div class="pp-main-pic">
                                     <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
