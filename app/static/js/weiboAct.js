@@ -238,7 +238,7 @@ var tweet_thumbs_up = function ($self) {
                 num = num + 1;
             } else {
                 num = num - 1;
-            } 
+            }
             icon.text(' ' + num);
         } else {
             alert('操作失败！')
@@ -247,7 +247,7 @@ var tweet_thumbs_up = function ($self) {
     var error = function (err) {
         log('reg, ', err);
     };
-    weibo.tweet_delete(form, success, error);
+    weibo.tweet_thumbs_up(form, success, error);
 };
 
 weibo.tweet_delete = function (form, success, error) {

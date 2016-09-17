@@ -62,7 +62,8 @@ def tweet_up():
         message=True,
     )
     u = current_user()
-    like = Like.query.filter_by(tweet_id=t.id, user_id=u.id)
+    like = Like.query.filter_by(tweet_id=t.id, user_id=u.id).first()
+    print('like', like)
     if like is None:
         l = Like()
         l.user_id = u.id
