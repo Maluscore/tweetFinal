@@ -67,3 +67,6 @@ a .icon-remove {
 .pp-comment-content span {
     font-weight: bold;
 }
+div .icon-remove {
+    padding: 0;
+}
