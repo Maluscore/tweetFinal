@@ -232,11 +232,14 @@ var tweet_thumbs_up = function ($self) {
         log('r, ', r);
         if (r.success) {
             // 再进行一次判断，决定是取消还是点赞
+            var icon = tweetSelf.find('.icon-thumbs-up');
+            var num = Number(icon.text());
             if (r.message) {
-
+                num = num + 1;
             } else {
-
-            }
+                num = num - 1;
+            } 
+            icon.text(' ' + num);
         } else {
             alert('操作失败！')
         }
