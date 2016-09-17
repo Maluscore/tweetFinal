@@ -39,6 +39,18 @@
                 var $self = $(this);
                 tweet_thumbs_up($self);
             });
+            $('#id-div-insert').on('click', '.icon-share-alt', function () {
+                log('准备转发');
+                var ppModal = $('#myModal');
+                ppModal.modal('show');
+                $('#id-btn-share').on('click', function () {
+                    log(ppModal.find('#id-input-share').val());
+                    ppModal.modal('hide');
+                });
+                ppModal.on('hidden.bs.modal', function () {
+                    ppModal.find('#id-input-share').val('')
+                });
+            });
         };
 
         var __main = function () {
@@ -117,5 +129,22 @@
                 </div>
             </div>
         {% endfor %}
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">转发内容</h4>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="modal-body-input" id="id-input-share" placeholder="...">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              <button type="button" class="btn btn-primary" id="id-btn-share">确认转发</button>
+            </div>
+          </div>
+        </div>
     </div>
 {% endblock %}
