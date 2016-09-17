@@ -6,7 +6,7 @@
 }
 #id-div-insert div {
     outline-width: 1px;
-    outline-style: dotted;
+    /*outline-style: dotted;*/
     outline-color: red;
 }
 a .icon-remove {
