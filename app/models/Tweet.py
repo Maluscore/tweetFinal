@@ -38,6 +38,10 @@ class Tweet(db.Model, ReprMixin):
         num = self.likes.count()
         return num
 
+    def users_id(self):
+        all_likes = self.likes.all()
+        return [a.user_id for a in all_likes]
+
     def save(self):
         db.session.add(self)
         db.session.commit()

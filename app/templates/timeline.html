@@ -110,7 +110,11 @@
                 <div class="pp-main-footer">
                     <a class="btn icon-share-alt" title="转发"> 2</a>
                     <a class="btn icon-comment" title="评论"> {{ t.com_count }}</a>
-                    <a class="btn icon-thumbs-up" title="赞"> {{ t.likes_count() }}</a>
+                    {% if current_user.id in t.users_id() %}
+                        <a class="btn icon-thumbs-up" style="color: #e81c4f;" title="赞"> {{ t.likes_count() }}</a>
+                    {% else %}
+                        <a class="btn icon-thumbs-up" title="赞"> {{ t.likes_count() }}</a>
+                    {% endif %}
                 </div>
             </div>
         </div>

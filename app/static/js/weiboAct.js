@@ -236,8 +236,10 @@ var tweet_thumbs_up = function ($self) {
             var num = Number(icon.text());
             if (r.message) {
                 num = num + 1;
+                icon.css("color", "#e81c4f");
             } else {
                 num = num - 1;
+                icon.css("color", "#337ab7");
             }
             icon.text(' ' + num);
         } else {
