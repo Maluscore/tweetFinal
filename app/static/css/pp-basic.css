@@ -70,3 +70,11 @@ a .icon-remove {
 div .icon-remove {
     padding: 0;
 }
+.modal-body {
+    padding: 0 0 0 10px;
+}
+.modal-body-input {
+    border: none;
+    height: 30px;
+    width: 580px;
+}

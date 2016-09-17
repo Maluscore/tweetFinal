@@ -59,7 +59,7 @@ var tweet_add = function () {
                                     <img class="pp-weibo-pic" src="/static/img/main-pic.jpg">
                                 </div> -->
                                 <div class="pp-main-footer">
-                                    <a class="btn icon-share-alt" title="转发"> 2</a>
+                                    <a class="btn icon-share-alt" title="转发"> 0</a>
                                     <a class="btn icon-comment" title="评论"> 0</a>
                                     <a class="btn icon-thumbs-up" title="赞"> 0</a>
                                 </div>
