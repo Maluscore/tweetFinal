@@ -86,7 +86,7 @@ var comment_close = function ($self) {
         if (r.success) {
             log('r.message :', r.message);
             var count = r.data.com_count;
-            $self.html(count);
+            $self.html(' ' + count);
             var timeDelay = function () {
                 comment_zone.remove();
 

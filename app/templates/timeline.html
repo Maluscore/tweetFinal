@@ -98,7 +98,7 @@
             <div class="pp-main flex-1">
                 <div class="pp-main-header">
                     <strong class="pp-full-name">{{ t.sender_name }}</strong>
-                    <span class="pp-timestamp">{{ t.created_time }}</span>
+                    <span class="pp-timestamp">{{ t.created_time | formatted_time}}</span>
                     <a class="icon-remove btn" title="删除"></a>
                 </div>
                 <div class="pp-main-content">

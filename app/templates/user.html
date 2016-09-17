@@ -96,7 +96,7 @@
                 <div class="pp-main flex-1">
                     <div class="pp-main-header">
                         <strong class="pp-full-name">{{ t.sender_name }}</strong>
-                        <span class="pp-timestamp">{{ t.created_time }}</span>
+                        <span class="pp-timestamp">{{ t.created_time | formatted_time }}</span>
                         <a class="icon-remove btn" title="删除"></a>
                     </div>
                     <div class="pp-main-content">
@@ -108,7 +108,11 @@
                     <div class="pp-main-footer">
                         <a class="btn icon-share-alt" title="转发"> 2</a>
                         <a class="btn icon-comment" title="评论"> {{ t.com_count }}</a>
-                        <a class="btn icon-thumbs-up" title="赞"> {{ t.likes_count() }}</a>
+                        {% if current_user.id in t.users_id() %}
+                            <a class="btn icon-thumbs-up" style="color: #e81c4f;" title="赞"> {{ t.likes_count() }}</a>
+                        {% else %}
+                            <a class="btn icon-thumbs-up" title="赞"> {{ t.likes_count() }}</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
