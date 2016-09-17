@@ -8,41 +8,46 @@
     <script src="/static/js/weiboAct.js"></script>
     <script src="/static/js/userAct.js"></script>
     <script>
-    var bindActions = function () {
-        $('#id-div-insert').on('click', '.icon-remove', function () {
-            if ({{current_user.id}} == {{user.id}})
-            {
-                var $self = $(this);
-                tweet_delete($self);
-            }
-        });
-        $('a#status').on('click', function () {
-            var user_id = {{user.id}};
-            user_act(user_id);
-        });
-        $('#id-div-insert').on('click', '.icon-comment', function () {
-                var $self = $(this);
-                var status = $self.text();
-                if (status == '收起') {
-                    comment_close($self);
-                } else {
-                    comment_open($self);
+        var bindActions = function () {
+            $('#id-div-insert').on('click', '.icon-remove', function () {
+                if ({{current_user.id}} == {{user.id}})
+                {
+                    var $self = $(this);
+                    tweet_delete($self);
                 }
-        });
-        $('#id-div-insert').on('click', '#id-btn-comment', function () {
-            log('准备添加评论');
-            var $self = $(this);
-            add_comment($self);
-        });
-    };
+            });
+            $('a#status').on('click', function () {
+                var user_id = {{user.id}};
+                user_act(user_id);
+            });
+            $('#id-div-insert').on('click', '.icon-comment', function () {
+                    var $self = $(this);
+                    var status = $self.text();
+                    if (status == '收起') {
+                        comment_close($self);
+                    } else {
+                        comment_open($self);
+                    }
+            });
+            $('#id-div-insert').on('click', '#id-btn-comment', function () {
+                log('准备添加评论');
+                var $self = $(this);
+                add_comment($self);
+            });
+            $('#id-div-insert').on('click', '.icon-thumbs-up', function() {
+                log('准备开赞');
+                var $self = $(this);
+                tweet_thumbs_up($self);
+            });
+        };
 
-    var __main = function () {
-        bindActions();
-    };
+        var __main = function () {
+            bindActions();
+        };
 
-    $(document).ready(function () {
-        __main();
-    });
+        $(document).ready(function () {
+            __main();
+        });
     </script>
 {% endblock %}
 
@@ -103,7 +108,7 @@
                     <div class="pp-main-footer">
                         <a class="btn icon-share-alt" title="转发"> 2</a>
                         <a class="btn icon-comment" title="评论"> {{ t.com_count }}</a>
-                        <a class="btn icon-thumbs-up" title="赞"> 5</a>
+                        <a class="btn icon-thumbs-up" title="赞"> {{ t.likes_count() }}</a>
                     </div>
                 </div>
             </div>
