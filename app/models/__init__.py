@@ -11,3 +11,4 @@ from .User import User
 from .Tweet import Tweet
 from .Follow import Follow
 from .Comment import Comment
+from .Like import Like

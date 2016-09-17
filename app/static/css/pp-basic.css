@@ -9,6 +9,9 @@
     outline-style: dotted;
     outline-color: red;
 }
+a .icon-remove {
+    padding: 0 2px;
+}
 .pp-flex-row {
     display: flex;
     flex-direction: row;
@@ -20,7 +23,7 @@
     text-align: center;
 }
 .pp-avatar {
-    width: 60px;
+    min-width: 60px;
 }
 .pp-avatar-me {
     border-radius: 15%;

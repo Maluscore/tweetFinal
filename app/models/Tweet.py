@@ -13,6 +13,7 @@ class Tweet(db.Model, ReprMixin):
     deleted = db.Column(db.Integer, default=0)
     sender_name = db.Column(db.String())
     comments = db.relationship('Comment')
+    likes = db.relationship('Like', lazy='dynamic')
     # 这是一个外键
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
@@ -32,6 +33,10 @@ class Tweet(db.Model, ReprMixin):
             '_sa_instance_state',
         ]
         return b
+
+    def likes_count(self):
+        num = self.comments.count()
+        return num
 
     def save(self):
         db.session.add(self)

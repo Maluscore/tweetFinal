@@ -21,7 +21,7 @@ def init_app():
     # 设置你的加密 key
     app.secret_key = 'TODO fixme'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{}'.format(db_path)
-    # 初始化 db，套路
+    # 初始化 db，套路 xx.init_app()就是flask扩展框架的一种注册套路
     db.init_app(app)
     db.app = app
 

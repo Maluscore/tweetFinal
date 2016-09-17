@@ -7,7 +7,7 @@ from flask import request
 from flask import jsonify
 
 
-# 处理 关注用户 的请求 GET
+# 处理 关注用户 的请求
 @main.route('/follow', methods=['POST'])
 def follow_act():
     form = request.get_json()
@@ -25,7 +25,7 @@ def follow_act():
     # return redirect(url_for('timeline_view', username=u.username))
 
 
-# 处理 取消关注 的请求 GET
+# 处理 取消关注 的请求
 @main.route('/unfollow', methods=['POST'])
 def unfollow_act():
     form = request.get_json()
