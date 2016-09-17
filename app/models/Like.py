@@ -3,6 +3,8 @@ from . import ReprMixin
 
 import time
 
+# 建立多对多的关系
+
 
 class Like(db.Model, ReprMixin):
     __tablename__ = 'likes'
