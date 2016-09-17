@@ -35,7 +35,7 @@ class Tweet(db.Model, ReprMixin):
         return b
 
     def likes_count(self):
-        num = self.comments.count()
+        num = self.likes.count()
         return num
 
     def save(self):

@@ -1,5 +1,6 @@
 from ..models import User
 from ..models import Tweet
+from ..models import Like
 from . import main
 from . import current_user
 from ..time_filter import formatted_time
@@ -49,4 +50,25 @@ def tweet_delete():
         t.deleted = 1
         t.save()
         r['message'] = '删除成功'
+    return jsonify(r)
+
+
+@main.route('/tweet/thumbs_up', methods=['POST'])
+def tweet_up():
+    form = request.get_json()
+    t = Tweet.query.filter_by(id=form['id']).first()
+    r = dict(
+        success=True,
+        message=True,
+    )
+    u = current_user()
+    like = Like.query.filter_by(tweet_id=t.id, user_id=u.id)
+    if like is None:
+        l = Like()
+        l.user_id = u.id
+        l.tweet_id = t.id
+        l.save()
+    else:
+        r['message'] = False
+        like.delete()
     return jsonify(r)

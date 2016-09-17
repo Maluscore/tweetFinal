@@ -29,6 +29,11 @@
                 var $self = $(this);
                 add_comment($self);
             });
+            $('#id-div-insert').on('click', '.icon-thumbs-up', function() {
+                log('准备开赞');
+                var $self = $(this);
+                tweet_thumbs_up($self);
+            });
         };
 
         var __main = function () {

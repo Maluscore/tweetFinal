@@ -223,17 +223,22 @@ var tweet_share = function (tweetID) {
 // };
 
 // 点赞
-var tweet_thumbs_up = function (tweetID) {
+var tweet_thumbs_up = function ($self) {
+    var tweetSelf = tweet_chosen($self);
     var form = {
-        id: "tweetID"
+        id: tweetSelf.data('id')
     };
     var success = function (r) {
         log('r, ', r);
         if (r.success) {
-            log(r.message);
-            // $('#id-tweet-' + r.data.id).empty();
+            // 再进行一次判断，决定是取消还是点赞
+            if (r.message) {
+
+            } else {
+
+            }
         } else {
-            alert('删除失败！')
+            alert('操作失败！')
         }
     };
     var error = function (err) {
